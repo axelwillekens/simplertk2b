@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/axelilvo/simplertk2b/main.cpp
+src/simplertk2b.h
+/home/axelilvo/simplertk2b/src/simplertk2b.h
+iostream
+-
+
+/home/axelilvo/simplertk2b/src/simplertk2b.cpp
+simplertk2b.h
+/home/axelilvo/simplertk2b/src/simplertk2b.h
+
+/home/axelilvo/simplertk2b/src/simplertk2b.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/simplertk2b.dir/main.cpp.o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o  -o simplertk2b -lboost_system -lboost_regex -lboost_thread 
