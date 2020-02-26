@@ -1,7 +1,13 @@
-#include "src/simplertk2b.h"
 #include <iostream>
+
+extern "C" {
+    #include "src/serialComm.h"
+}
 
 int main() {
     std::cout << "hello world" << std::endl;
+    initSerialComm();
+    readSerialPort();
+    CloseSerialPort();
 }
 

@@ -4,5 +4,11 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.ipp": "cpp",
+			"cstring": "cpp",
+			"cerrno": "c"
+		}
+	}
 }

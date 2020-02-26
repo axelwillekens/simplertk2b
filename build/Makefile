@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/serialComm.o: src/serialComm.c.o
+
+.PHONY : src/serialComm.o
+
+# target to build an object file
+src/serialComm.c.o:
+	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.o
+.PHONY : src/serialComm.c.o
+
+src/serialComm.i: src/serialComm.c.i
+
+.PHONY : src/serialComm.i
+
+# target to preprocess a source file
+src/serialComm.c.i:
+	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.i
+.PHONY : src/serialComm.c.i
+
+src/serialComm.s: src/serialComm.c.s
+
+.PHONY : src/serialComm.s
+
+# target to generate assembly for a file
+src/serialComm.c.s:
+	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.s
+.PHONY : src/serialComm.c.s
+
 src/simplertk2b.o: src/simplertk2b.cpp.o
 
 .PHONY : src/simplertk2b.o
@@ -189,6 +216,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/serialComm.o"
+	@echo "... src/serialComm.i"
+	@echo "... src/serialComm.s"
 	@echo "... src/simplertk2b.o"
 	@echo "... src/simplertk2b.i"
 	@echo "... src/simplertk2b.s"

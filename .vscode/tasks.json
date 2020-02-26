@@ -8,12 +8,14 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "type": "shell",
             "label": "clean",
-            "command": "./cmd/clean.sh"
+            "command": "./cmd/clean.sh",
+            "problemMatcher": []
         }
     ]
   }
