@@ -44,32 +44,70 @@ void initSerialComm() {
     }
 }
 
-void readSerialPort() {
+nmealine* readLineSerialPort() {
     // Allocate memory for read buffer, set size according to your needs
-    char read_buf [256];
-    memset(&read_buf, '\0', sizeof(read_buf));
+    nmealine* line_ptr = (nmealine*) malloc(sizeof(nmealine));
+    if (line_ptr == NULL) {
+        printf("Error readLineSerialPort: allocation of nmealine didn't work out! \n");
+        return NULL;
+    }
+    line_ptr->bufsize = 512;
+    line_ptr->size = 0;
+    line_ptr->line = (char*) calloc(line_ptr->bufsize, sizeof(char));
+    if (line_ptr->line == NULL) {
+        printf("Error readLineSerialPort: allocation of nmealine didn't work out in method! \n");
+        return NULL;
+    }
 
     // Read bytes. The behaviour of read() (e.g. does it block?,
     // how long does it block for?) depends on the configuration
     // settings above, specifically VMIN and VTIME
-    int num_bytes = read(serial_port, &read_buf, sizeof(read_buf));
+    char readchar;
+    int num_bytes = read(serial_port, &readchar, sizeof(char));
+    // read sentence
+    while (readchar != '*' && num_bytes >= 0) {
+       line_ptr->line[line_ptr->size] = readchar;
+       num_bytes = read(serial_port, &readchar, sizeof(char));
+       line_ptr->size++;
+    }
 
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
-        printf("Error reading: %s", strerror(errno));
+        printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
+        return NULL;
     }
 
-    // Here we assume we received ASCII data, but you might be sending raw bytes (in that case, don't try and
-    // print it to the screen like this!)
-    printf("Read %i bytes. Received message: %s", num_bytes, read_buf);
+    // read checksum
+    char checksumbuf[5] = {'\0'};
+    int i = 0;
+    num_bytes = read(serial_port, &readchar, sizeof(char));
+    while (readchar != '\n' && num_bytes >= 0) {
+        checksumbuf[i] = readchar;
+        num_bytes = read(serial_port, &readchar, sizeof(char));
+        i++;
+    }
+    line_ptr->checksum = atoi(checksumbuf);
+    
+    // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
+    if (num_bytes < 0) {
+        printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
+        return NULL;
+    }
+
+    return line_ptr;
 }
 
-void WriteSerialPort(unsigned char msg) {
+void WriteSerialPort(unsigned char* msg) {
     // Write to serial port
     write(serial_port, msg, sizeof(msg));
 }
 
 void CloseSerialPort() {
     close(serial_port);
+}
+
+void freeNmeaLine(nmealine** line) {
+    free((*line)->line);
+    free(*line);
 }
 

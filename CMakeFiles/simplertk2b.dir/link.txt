@@ -1,0 +1,1 @@
+/usr/bin/g++-8  -g  -rdynamic CMakeFiles/simplertk2b.dir/main.cpp.o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o CMakeFiles/simplertk2b.dir/src/serialComm.c.o  -o simplertk2b 

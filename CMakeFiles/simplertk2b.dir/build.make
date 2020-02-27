@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/axelilvo/simplertk2b
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/axelilvo/simplertk2b/build
+CMAKE_BINARY_DIR = /home/axelilvo/simplertk2b
 
 # Include any dependencies generated for this target.
 include CMakeFiles/simplertk2b.dir/depend.make
@@ -58,17 +58,17 @@ include CMakeFiles/simplertk2b.dir/progress.make
 include CMakeFiles/simplertk2b.dir/flags.make
 
 CMakeFiles/simplertk2b.dir/main.cpp.o: CMakeFiles/simplertk2b.dir/flags.make
-CMakeFiles/simplertk2b.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/simplertk2b.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplertk2b.dir/main.cpp.o -c /home/axelilvo/simplertk2b/main.cpp
+CMakeFiles/simplertk2b.dir/main.cpp.o: main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/simplertk2b.dir/main.cpp.o"
+	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplertk2b.dir/main.cpp.o -c /home/axelilvo/simplertk2b/main.cpp
 
 CMakeFiles/simplertk2b.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simplertk2b.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/main.cpp > CMakeFiles/simplertk2b.dir/main.cpp.i
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/main.cpp > CMakeFiles/simplertk2b.dir/main.cpp.i
 
 CMakeFiles/simplertk2b.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simplertk2b.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/main.cpp -o CMakeFiles/simplertk2b.dir/main.cpp.s
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/main.cpp -o CMakeFiles/simplertk2b.dir/main.cpp.s
 
 CMakeFiles/simplertk2b.dir/main.cpp.o.requires:
 
@@ -82,17 +82,17 @@ CMakeFiles/simplertk2b.dir/main.cpp.o.provides.build: CMakeFiles/simplertk2b.dir
 
 
 CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o: CMakeFiles/simplertk2b.dir/flags.make
-CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o: ../src/simplertk2b.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o -c /home/axelilvo/simplertk2b/src/simplertk2b.cpp
+CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o: src/simplertk2b.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o"
+	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o -c /home/axelilvo/simplertk2b/src/simplertk2b.cpp
 
 CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/src/simplertk2b.cpp > CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.i
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/src/simplertk2b.cpp > CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.i
 
 CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/src/simplertk2b.cpp -o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.s
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/src/simplertk2b.cpp -o CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.s
 
 CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o.requires:
 
@@ -106,17 +106,17 @@ CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o.provides.build: CMakeFiles/simp
 
 
 CMakeFiles/simplertk2b.dir/src/serialComm.c.o: CMakeFiles/simplertk2b.dir/flags.make
-CMakeFiles/simplertk2b.dir/src/serialComm.c.o: ../src/serialComm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/simplertk2b.dir/src/serialComm.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/simplertk2b.dir/src/serialComm.c.o   -c /home/axelilvo/simplertk2b/src/serialComm.c
+CMakeFiles/simplertk2b.dir/src/serialComm.c.o: src/serialComm.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/simplertk2b.dir/src/serialComm.c.o"
+	/usr/bin/gcc-8 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/simplertk2b.dir/src/serialComm.c.o   -c /home/axelilvo/simplertk2b/src/serialComm.c
 
 CMakeFiles/simplertk2b.dir/src/serialComm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/simplertk2b.dir/src/serialComm.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/axelilvo/simplertk2b/src/serialComm.c > CMakeFiles/simplertk2b.dir/src/serialComm.c.i
+	/usr/bin/gcc-8 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/axelilvo/simplertk2b/src/serialComm.c > CMakeFiles/simplertk2b.dir/src/serialComm.c.i
 
 CMakeFiles/simplertk2b.dir/src/serialComm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/simplertk2b.dir/src/serialComm.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/axelilvo/simplertk2b/src/serialComm.c -o CMakeFiles/simplertk2b.dir/src/serialComm.c.s
+	/usr/bin/gcc-8 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/axelilvo/simplertk2b/src/serialComm.c -o CMakeFiles/simplertk2b.dir/src/serialComm.c.s
 
 CMakeFiles/simplertk2b.dir/src/serialComm.c.o.requires:
 
@@ -143,7 +143,7 @@ simplertk2b: CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o
 simplertk2b: CMakeFiles/simplertk2b.dir/src/serialComm.c.o
 simplertk2b: CMakeFiles/simplertk2b.dir/build.make
 simplertk2b: CMakeFiles/simplertk2b.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/axelilvo/simplertk2b/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable simplertk2b"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable simplertk2b"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simplertk2b.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -162,6 +162,6 @@ CMakeFiles/simplertk2b.dir/clean:
 .PHONY : CMakeFiles/simplertk2b.dir/clean
 
 CMakeFiles/simplertk2b.dir/depend:
-	cd /home/axelilvo/simplertk2b/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b/build /home/axelilvo/simplertk2b/build /home/axelilvo/simplertk2b/build/CMakeFiles/simplertk2b.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/axelilvo/simplertk2b && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b /home/axelilvo/simplertk2b/CMakeFiles/simplertk2b.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/simplertk2b.dir/depend
 

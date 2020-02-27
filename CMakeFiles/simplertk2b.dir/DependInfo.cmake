@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/axelilvo/simplertk2b/src/serialComm.c" "/home/axelilvo/simplertk2b/build/CMakeFiles/simplertk2b.dir/src/serialComm.c.o"
+  "/home/axelilvo/simplertk2b/src/serialComm.c" "/home/axelilvo/simplertk2b/CMakeFiles/simplertk2b.dir/src/serialComm.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -13,8 +13,8 @@ set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/axelilvo/simplertk2b/main.cpp" "/home/axelilvo/simplertk2b/build/CMakeFiles/simplertk2b.dir/main.cpp.o"
-  "/home/axelilvo/simplertk2b/src/simplertk2b.cpp" "/home/axelilvo/simplertk2b/build/CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o"
+  "/home/axelilvo/simplertk2b/main.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/simplertk2b.dir/main.cpp.o"
+  "/home/axelilvo/simplertk2b/src/simplertk2b.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -6,16 +6,16 @@
 
 #IncludeRegexTransform: 
 
-/home/axelilvo/simplertk2b/main.cpp
-iostream
--
-src/serialComm.h
+/home/axelilvo/simplertk2b/src/serialComm.c
+serialComm.h
 /home/axelilvo/simplertk2b/src/serialComm.h
 
 /home/axelilvo/simplertk2b/src/serialComm.h
 stdio.h
 -
 string.h
+-
+stdlib.h
 -
 fcntl.h
 -
@@ -25,10 +25,4 @@ termios.h
 -
 unistd.h
 -
-
-/home/axelilvo/simplertk2b/src/simplertk2b.cpp
-simplertk2b.h
-/home/axelilvo/simplertk2b/src/simplertk2b.h
-
-/home/axelilvo/simplertk2b/src/simplertk2b.h
 
