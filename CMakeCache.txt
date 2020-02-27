@@ -187,6 +187,9 @@ Project_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/home/axelilvo/simplertk2b
 
+//Dependencies for target
+serialComm_LIB_DEPENDS:STATIC=
+
 
 ########################
 # INTERNAL cache entries

@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named serialComm
+
+# Build rule for target.
+serialComm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 serialComm
+.PHONY : serialComm
+
+# fast build rule for target.
+serialComm/fast:
+	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/build
+.PHONY : serialComm/fast
+
+#=============================================================================
 # Target rules for targets named simplertk2b
 
 # Build rule for target.
@@ -122,6 +135,33 @@ simplertk2b: cmake_check_build_system
 simplertk2b/fast:
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
 .PHONY : simplertk2b/fast
+
+lib/serialcomm/serialComm.o: lib/serialcomm/serialComm.c.o
+
+.PHONY : lib/serialcomm/serialComm.o
+
+# target to build an object file
+lib/serialcomm/serialComm.c.o:
+	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.o
+.PHONY : lib/serialcomm/serialComm.c.o
+
+lib/serialcomm/serialComm.i: lib/serialcomm/serialComm.c.i
+
+.PHONY : lib/serialcomm/serialComm.i
+
+# target to preprocess a source file
+lib/serialcomm/serialComm.c.i:
+	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.i
+.PHONY : lib/serialcomm/serialComm.c.i
+
+lib/serialcomm/serialComm.s: lib/serialcomm/serialComm.c.s
+
+.PHONY : lib/serialcomm/serialComm.s
+
+# target to generate assembly for a file
+lib/serialcomm/serialComm.c.s:
+	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.s
+.PHONY : lib/serialcomm/serialComm.c.s
 
 main.o: main.cpp.o
 
@@ -150,60 +190,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/serialComm.o: src/serialComm.c.o
-
-.PHONY : src/serialComm.o
-
-# target to build an object file
-src/serialComm.c.o:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.o
-.PHONY : src/serialComm.c.o
-
-src/serialComm.i: src/serialComm.c.i
-
-.PHONY : src/serialComm.i
-
-# target to preprocess a source file
-src/serialComm.c.i:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.i
-.PHONY : src/serialComm.c.i
-
-src/serialComm.s: src/serialComm.c.s
-
-.PHONY : src/serialComm.s
-
-# target to generate assembly for a file
-src/serialComm.c.s:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/serialComm.c.s
-.PHONY : src/serialComm.c.s
-
-src/simplertk2b.o: src/simplertk2b.cpp.o
-
-.PHONY : src/simplertk2b.o
-
-# target to build an object file
-src/simplertk2b.cpp.o:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.o
-.PHONY : src/simplertk2b.cpp.o
-
-src/simplertk2b.i: src/simplertk2b.cpp.i
-
-.PHONY : src/simplertk2b.i
-
-# target to preprocess a source file
-src/simplertk2b.cpp.i:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.i
-.PHONY : src/simplertk2b.cpp.i
-
-src/simplertk2b.s: src/simplertk2b.cpp.s
-
-.PHONY : src/simplertk2b.s
-
-# target to generate assembly for a file
-src/simplertk2b.cpp.s:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/src/simplertk2b.cpp.s
-.PHONY : src/simplertk2b.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -211,17 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... simplertk2b"
 	@echo "... edit_cache"
+	@echo "... serialComm"
+	@echo "... simplertk2b"
+	@echo "... lib/serialcomm/serialComm.o"
+	@echo "... lib/serialcomm/serialComm.i"
+	@echo "... lib/serialcomm/serialComm.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/serialComm.o"
-	@echo "... src/serialComm.i"
-	@echo "... src/serialComm.s"
-	@echo "... src/simplertk2b.o"
-	@echo "... src/simplertk2b.i"
-	@echo "... src/simplertk2b.s"
 .PHONY : help
 
 

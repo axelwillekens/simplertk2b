@@ -9,7 +9,8 @@
 			"*.ipp": "cpp",
 			"cstring": "cpp",
 			"cerrno": "c",
-			"string": "cpp"
+			"string": "cpp",
+			"*.tpp": "cpp"
 		}
 	}
 }
