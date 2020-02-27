@@ -14,19 +14,18 @@
 
 typedef struct nmealine {
     char* line;
-    int checksum;
     int size;
-    int bufsize;
 } nmealine;
 
 int serial_port;
 struct termios tty;
 
-void initSerialComm();
+void initSerialComm(const char*);
 nmealine* readLineSerialPort();
 void WriteSerialPort(unsigned char*);
 void CloseSerialPort();
 
+int checksumcheck(nmealine*, int);
 void freeNmeaLine(nmealine**);
 
 #endif // SERIALCOMM_H

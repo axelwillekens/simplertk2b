@@ -6,40 +6,11 @@
     // More info on cppdbg-specific launch parameters: https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md
     "version": "0.2.0",
     "configurations": [
-    
         {
-            "name": "pi_nitzu_part1",
+            "name": "simplertk2b",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/pi_nitzu_part1",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false, // This value doesn't seem to actually do anything..
-            "MIMode": "gdb",
-            "osx": {
-                "MIMode": "lldb",
-            },
-            "windows": {
-                "program": "${workspaceFolder}/pi_nitzu_part1.exe",
-                "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-            },
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            // Build the app before debugging
-            "preLaunchTask": "build pi_nitzu_part1"
-        },
-        {
-            "name": "pi_nitzu_part2",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/pi_nitzu_part2",
+            "program": "${workspaceFolder}/simplertk2b",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -47,7 +18,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             "windows": {
-                "program": "${workspaceFolder}/pi_nitzu_part2.exe",
+                "program": "${workspaceFolder}/simplertk2b.exe",
                 "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
             },
             "setupCommands": [
@@ -58,7 +29,7 @@
                 }
             ],
             // Build the app before debugging
-            "preLaunchTask": "build pi_nitzu_part2"
+            "preLaunchTask": "build simplertk2b"
         }
     ]
 }

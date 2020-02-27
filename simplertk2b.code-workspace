@@ -8,7 +8,8 @@
 		"files.associations": {
 			"*.ipp": "cpp",
 			"cstring": "cpp",
-			"cerrno": "c"
+			"cerrno": "c",
+			"string": "cpp"
 		}
 	}
 }

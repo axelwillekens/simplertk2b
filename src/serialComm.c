@@ -2,9 +2,9 @@
 
 // Got info from https://blog.mbedded.ninja/programming/operating-systems/linux/linux-serial-ports-using-c-cpp/
 
-void initSerialComm() {
+void initSerialComm(const char* portname) {
     // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
-    serial_port = open("/dev/ttyACM0", O_RDWR);
+    serial_port = open(portname, O_RDWR);
     memset(&tty, 0, sizeof tty);
 
     // Read in existing settings, and handle any error
@@ -44,6 +44,7 @@ void initSerialComm() {
     }
 }
 
+// Read a NMEA line from the port
 nmealine* readLineSerialPort() {
     // Allocate memory for read buffer, set size according to your needs
     nmealine* line_ptr = (nmealine*) malloc(sizeof(nmealine));
@@ -51,9 +52,8 @@ nmealine* readLineSerialPort() {
         printf("Error readLineSerialPort: allocation of nmealine didn't work out! \n");
         return NULL;
     }
-    line_ptr->bufsize = 512;
     line_ptr->size = 0;
-    line_ptr->line = (char*) calloc(line_ptr->bufsize, sizeof(char));
+    line_ptr->line = (char*) calloc(512, sizeof(char));
     if (line_ptr->line == NULL) {
         printf("Error readLineSerialPort: allocation of nmealine didn't work out in method! \n");
         return NULL;
@@ -78,7 +78,7 @@ nmealine* readLineSerialPort() {
     }
 
     // read checksum
-    char checksumbuf[5] = {'\0'};
+    char checksumbuf[5] = {0};
     int i = 0;
     num_bytes = read(serial_port, &readchar, sizeof(char));
     while (readchar != '\n' && num_bytes >= 0) {
@@ -86,7 +86,10 @@ nmealine* readLineSerialPort() {
         num_bytes = read(serial_port, &readchar, sizeof(char));
         i++;
     }
-    line_ptr->checksum = atoi(checksumbuf);
+    if (checksumcheck(line_ptr, (int)strtol(checksumbuf, NULL, 16)) < 0) {
+        printf("Bad line: Checksum does not match! \n");
+        // return NULL;
+    }
     
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
@@ -97,17 +100,32 @@ nmealine* readLineSerialPort() {
     return line_ptr;
 }
 
+// Write to serial port
 void WriteSerialPort(unsigned char* msg) {
-    // Write to serial port
     write(serial_port, msg, sizeof(msg));
 }
 
+// Close the serial port
 void CloseSerialPort() {
     close(serial_port);
 }
 
-void freeNmeaLine(nmealine** line) {
-    free((*line)->line);
-    free(*line);
+// method that does the checksum. 
+// returns 0 if OK
+// returns -1 if NOT OK
+int checksumcheck(nmealine* nmealine, int checksum) {
+    int sum = (int) nmealine->line[1];
+    for (int i=2; i < nmealine->size; i++) {
+        sum = sum ^ (int) nmealine->line[i];
+    }
+
+    if (sum != checksum) return -1;
+    else return 0;
+}
+
+// free the entire NMEA line
+void freeNmeaLine(nmealine** nmealine) {
+    free((*nmealine)->line);
+    free(*nmealine);
 }
 

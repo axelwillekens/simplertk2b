@@ -1,22 +1,22 @@
 #include <iostream>
+#include <string>
 
 extern "C" {
     #include "src/serialComm.h"
 }
 
 int main() {
-    std::cout << "hello world" << std::endl;
-    initSerialComm();
+    std::string portname1 = "/dev/ttyACM0";
+    initSerialComm(portname1.c_str());
 
-    nmealine* line = readLineSerialPort();
-    while (line != NULL) {
-        if (line == NULL) {
+    nmealine* nmealine = readLineSerialPort();
+    while (nmealine != NULL) {
+        if (nmealine == NULL) {
             std::cerr << "Read Line is failed!" << std::endl;
         }
-        std::cout << "Read line: " << line->line << std::endl;
-        std::cout << "Checksum: " << line->checksum << std::endl;
-        freeNmeaLine(&line);
-        line = readLineSerialPort();
+        std::cout << "Read line: " << nmealine->line << std::endl;
+        freeNmeaLine(&nmealine);
+        nmealine = readLineSerialPort();
     }
 
 
