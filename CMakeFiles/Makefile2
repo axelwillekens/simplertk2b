@@ -100,7 +100,7 @@ clean: CMakeFiles/serialComm.dir/clean
 # Target rules for target CMakeFiles/simplertk2b.dir
 
 # All Build rule for target.
-CMakeFiles/simplertk2b.dir/all:
+CMakeFiles/simplertk2b.dir/all: CMakeFiles/serialComm.dir/all
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/depend
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=3,4 "Built target simplertk2b"
@@ -113,7 +113,7 @@ all: CMakeFiles/simplertk2b.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/simplertk2b.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/simplertk2b.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 0
 .PHONY : CMakeFiles/simplertk2b.dir/rule

@@ -1,7 +1,5 @@
 #include "serialComm.h"
 
-// Got info from https://blog.mbedded.ninja/programming/operating-systems/linux/linux-serial-ports-using-c-cpp/
-
 void initSerialComm(const char* portname) {
     // Open the serial port. Change device path as needed (currently set to an standard FTDI USB-UART cable type device)
     serial_port = open(portname, O_RDWR);
@@ -45,18 +43,11 @@ void initSerialComm(const char* portname) {
 }
 
 // Read a NMEA line from the port
-nmealine* readLineSerialPort() {
-    // Allocate memory for read buffer, set size according to your needs
-    nmealine* line_ptr = (nmealine*) malloc(sizeof(nmealine));
-    if (line_ptr == NULL) {
-        printf("Error readLineSerialPort: allocation of nmealine didn't work out! \n");
-        return NULL;
-    }
+int readLineSerialPort(nmealine* line_ptr) {
+    // init parameters
     line_ptr->size = 0;
-    line_ptr->line = (char*) calloc(512, sizeof(char));
-    if (line_ptr->line == NULL) {
-        printf("Error readLineSerialPort: allocation of nmealine didn't work out in method! \n");
-        return NULL;
+    for(int i=0; i < LINELENGTH; i++ ) {
+        line_ptr->line[i] = '\0';
     }
 
     // Read bytes. The behaviour of read() (e.g. does it block?,
@@ -64,6 +55,7 @@ nmealine* readLineSerialPort() {
     // settings above, specifically VMIN and VTIME
     char readchar;
     int num_bytes = read(serial_port, &readchar, sizeof(char));
+
     // read sentence
     while (readchar != '*' && num_bytes >= 0) {
        line_ptr->line[line_ptr->size] = readchar;
@@ -74,7 +66,7 @@ nmealine* readLineSerialPort() {
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
         printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
-        return NULL;
+        return -1;
     }
 
     // read checksum
@@ -88,16 +80,15 @@ nmealine* readLineSerialPort() {
     }
     if (checksumcheck(line_ptr, (int)strtol(checksumbuf, NULL, 16)) < 0) {
         printf("Bad line: Checksum does not match! \n");
-        // return NULL;
     }
     
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
         printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
-        return NULL;
+        return -1;
     }
 
-    return line_ptr;
+    return 0;
 }
 
 // Write to serial port
@@ -122,10 +113,3 @@ int checksumcheck(nmealine* nmealine, int checksum) {
     if (sum != checksum) return -1;
     else return 0;
 }
-
-// free the entire NMEA line
-void freeNmeaLine(nmealine** nmealine) {
-    free((*nmealine)->line);
-    free(*nmealine);
-}
-

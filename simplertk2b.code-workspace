@@ -10,7 +10,9 @@
 			"cstring": "cpp",
 			"cerrno": "c",
 			"string": "cpp",
-			"*.tpp": "cpp"
+			"*.tpp": "cpp",
+			"cmath": "cpp",
+			"iostream": "cpp"
 		}
 	}
 }
