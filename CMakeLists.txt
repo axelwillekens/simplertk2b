@@ -5,9 +5,15 @@ file(GLOB serialcommfiles
     "lib/serialcomm/*.c"
 )
 
+file(GLOB ntripfiles
+    "lib/ntrip/*.h"
+    "lib/ntrip/*.c"
+)
+
 add_library(serialComm ${serialcommfiles})
+add_library(ntrip ${ntripfiles})
 
 add_executable(simplertk2b main.cpp)
-target_link_libraries(simplertk2b serialComm)
+target_link_libraries(simplertk2b serialComm ntrip)
 
 add_compile_options(-std=gnu99)

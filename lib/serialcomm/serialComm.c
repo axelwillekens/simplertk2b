@@ -7,7 +7,7 @@ void initSerialComm(const char* portname) {
 
     // Read in existing settings, and handle any error
     if(tcgetattr(serial_port, &tty) != 0) {
-        printf("Error %i from tcgetattr: %s\n", errno, strerror(errno));
+        fprintf(stderr, "Error %i from tcgetattr: %s\n", errno, strerror(errno));
     }
 
     tty.c_cflag &= ~PARENB; // Clear parity bit, disabling parity (most common)
@@ -38,7 +38,7 @@ void initSerialComm(const char* portname) {
 
     // Save tty settings, also checking for error
     if (tcsetattr(serial_port, TCSANOW, &tty) != 0) {
-        printf("Error %i from tcsetattr: %s\n", errno, strerror(errno));
+        fprintf(stderr, "Error %i from tcsetattr: %s\n", errno, strerror(errno));
     }
 }
 
@@ -65,7 +65,7 @@ int readLineSerialPort(nmealine* line_ptr) {
 
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
-        printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
+        fprintf(stderr, "Error readLineSerialPort: reading: %s \n", strerror(errno));
         return -1;
     }
 
@@ -79,12 +79,12 @@ int readLineSerialPort(nmealine* line_ptr) {
         i++;
     }
     if (checksumcheck(line_ptr, (int)strtol(checksumbuf, NULL, 16)) < 0) {
-        printf("Bad line: Checksum does not match! \n");
+        fprintf(stderr, "Bad line: Checksum does not match! \n");
     }
     
     // n is the number of bytes read. n may be 0 if no bytes were received, and can also be -1 to signal an error.
     if (num_bytes < 0) {
-        printf("Error readLineSerialPort: reading: %s \n", strerror(errno));
+        fprintf(stderr, "Error readLineSerialPort: reading: %s \n", strerror(errno));
         return -1;
     }
 

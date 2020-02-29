@@ -1,21 +1,19 @@
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
+  "C"
   )
 # The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/axelilvo/simplertk2b/main.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/simplertk2b.dir/main.cpp.o"
+set(CMAKE_DEPENDS_CHECK_C
+  "/home/axelilvo/simplertk2b/lib/ntrip/ntrip.c" "/home/axelilvo/simplertk2b/CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/axelilvo/simplertk2b/CMakeFiles/serialComm.dir/DependInfo.cmake"
-  "/home/axelilvo/simplertk2b/CMakeFiles/ntrip.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

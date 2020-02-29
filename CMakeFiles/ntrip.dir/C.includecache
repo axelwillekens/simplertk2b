@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/axelilvo/simplertk2b/lib/ntrip/ntrip.c
+ntrip.h
+/home/axelilvo/simplertk2b/lib/ntrip/ntrip.h
+
 /home/axelilvo/simplertk2b/lib/ntrip/ntrip.h
 getopt.h
 -
@@ -45,14 +49,4 @@ termios.h
 -
 unistd.h
 -
-
-/home/axelilvo/simplertk2b/main.cpp
-iostream
--
-string
--
-lib/serialcomm/serialComm.h
-/home/axelilvo/simplertk2b/lib/serialcomm/serialComm.h
-lib/ntrip/ntrip.h
-/home/axelilvo/simplertk2b/lib/ntrip/ntrip.h
 

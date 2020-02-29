@@ -13,7 +13,8 @@ void initNtripDefault() {
     args.port = 2101;
     args.user = "852a009";
     args.password = "97115";
-    args.mount = "FLEPOSVRS32GREC";
+    // args.mount = "FLEPOSVRS32GREC";
+    args.mount = 0;
 }
 
 /* does not buffer overrun, but breaks directly after an error */
@@ -44,7 +45,9 @@ int encode(char *buf, int size, char *user, char *pwd) {
     return bytes;
 }
 
-int connect() {
+int ntripConnect() {
+    char buf[MAXDATASIZE];
+
     if(!(he=gethostbyname(args.server))) {
         perror("gethostbyname-blabla");
         return -1;
@@ -63,20 +66,20 @@ int connect() {
     }
     if(!args.mount) {
         i = snprintf(buf, MAXDATASIZE,
-        "GET / HTTP/1.0\r\n"
+        "GET / HTTP/1.1\r\n"
         "User-Agent: %s/%s\r\n"
         "Accept: */*\r\n"
         "Connection: close \r\n"
         "\r\n"
-        , AGENTSTRING, revisionstr);
+        , AGENTSTRING, REVISIONSTRING);
     } else {
         i=snprintf(buf, MAXDATASIZE-40, /* leave some space for login */
-            "GET /%s HTTP/1.0\r\n"
+            "GET /%s HTTP/1.1\r\n"
             "User-Agent: %s/%s\r\n"
             // "Accept: */*\r\n"
             // "Connection: close \r\n"
             "Authorization: Basic "
-            , args.mount, AGENTSTRING, revisionstr);
+            , args.mount, AGENTSTRING, REVISIONSTRING);
         if(i > MAXDATASIZE-40 && i < 0) /* second check for old glibc */ {
             fprintf(stderr, "Requested mount too long\n");
             return -1;
@@ -104,9 +107,10 @@ int connect() {
                     return -1;
                 }
                 ++k;
+                printf("%s\r\n",buf);
             }
             else {
-                fwrite("alive\n", 6, 1, stdout);
+                printf("numbytes %d\r\n", numbytes);
                 fwrite(buf, numbytes, 1, stdout);
             }
         }

@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named simplertk2b
+
+# Build rule for target.
+simplertk2b: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 simplertk2b
+.PHONY : simplertk2b
+
+# fast build rule for target.
+simplertk2b/fast:
+	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
+.PHONY : simplertk2b/fast
+
+#=============================================================================
 # Target rules for targets named serialComm
 
 # Build rule for target.
@@ -124,17 +137,44 @@ serialComm/fast:
 .PHONY : serialComm/fast
 
 #=============================================================================
-# Target rules for targets named simplertk2b
+# Target rules for targets named ntrip
 
 # Build rule for target.
-simplertk2b: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 simplertk2b
-.PHONY : simplertk2b
+ntrip: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ntrip
+.PHONY : ntrip
 
 # fast build rule for target.
-simplertk2b/fast:
-	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
-.PHONY : simplertk2b/fast
+ntrip/fast:
+	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/build
+.PHONY : ntrip/fast
+
+lib/ntrip/ntrip.o: lib/ntrip/ntrip.c.o
+
+.PHONY : lib/ntrip/ntrip.o
+
+# target to build an object file
+lib/ntrip/ntrip.c.o:
+	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.o
+.PHONY : lib/ntrip/ntrip.c.o
+
+lib/ntrip/ntrip.i: lib/ntrip/ntrip.c.i
+
+.PHONY : lib/ntrip/ntrip.i
+
+# target to preprocess a source file
+lib/ntrip/ntrip.c.i:
+	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.i
+.PHONY : lib/ntrip/ntrip.c.i
+
+lib/ntrip/ntrip.s: lib/ntrip/ntrip.c.s
+
+.PHONY : lib/ntrip/ntrip.s
+
+# target to generate assembly for a file
+lib/ntrip/ntrip.c.s:
+	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.s
+.PHONY : lib/ntrip/ntrip.c.s
 
 lib/serialcomm/serialComm.o: lib/serialcomm/serialComm.c.o
 
@@ -198,8 +238,12 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... serialComm"
 	@echo "... simplertk2b"
+	@echo "... serialComm"
+	@echo "... ntrip"
+	@echo "... lib/ntrip/ntrip.o"
+	@echo "... lib/ntrip/ntrip.i"
+	@echo "... lib/ntrip/ntrip.s"
 	@echo "... lib/serialcomm/serialComm.o"
 	@echo "... lib/serialcomm/serialComm.i"
 	@echo "... lib/serialcomm/serialComm.s"

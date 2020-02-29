@@ -1,0 +1,2 @@
+/usr/bin/ar qc libntrip.a  CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.o
+/usr/bin/ranlib libntrip.a

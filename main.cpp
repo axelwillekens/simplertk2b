@@ -8,15 +8,22 @@ extern "C" {
     #include "lib/serialcomm/serialComm.h"
 }
 
+extern "C" {
+    #include "lib/ntrip/ntrip.h"
+}
+
 int main() {
-    std::string portname1 = "/dev/ttyACM0";
-    initSerialComm(portname1.c_str());
+    // std::string portname1 = "/dev/ttyACM0";
+    // initSerialComm(portname1.c_str());
 
-    nmealine nmealine;
-    while (readLineSerialPort(&nmealine) == 0) {
-        std::cout << "Read line: " << nmealine.line << std::endl;
-    }
+    // nmealine nmealine;
+    // while (readLineSerialPort(&nmealine) == 0) {
+    //     std::cout << "Read line: " << nmealine.line << std::endl;
+    // }
 
-    CloseSerialPort();
+    // CloseSerialPort();
+
+    initNtripDefault();
+    ntripConnect();
 }
 
