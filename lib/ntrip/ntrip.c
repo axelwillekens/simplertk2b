@@ -1,22 +1,5 @@
 #include "ntrip.h"
 
-void initNtrip(char* server, char* mountpoint, int port, char* user, char* password){
-    args.server = server;
-    args.mount = mountpoint;
-    args.port = port;
-    args.user = user;
-    args.password = password;
-}
-
-void initNtripDefault() {
-    args.server = "flepos.vlaanderen.be";
-    args.port = 2101;
-    args.user = "852a009";
-    args.password = "97115";
-    // args.mount = "FLEPOSVRS32GREC";
-    args.mount = 0;
-}
-
 /* does not buffer overrun, but breaks directly after an error */
 /* returns the number of required bytes */
 int encode(char *buf, int size, char *user, char *pwd) {
@@ -42,10 +25,17 @@ int encode(char *buf, int size, char *user, char *pwd) {
         bytes += 4;
     }
     if(out-buf < size) *out = 0;
+    // printf("%s\n",buf);
     return bytes;
 }
 
-int ntripConnect() {
+int connectNtrip(char* server, char* mountpoint, int port, char* user, char* password) {
+    args.server = server;
+    args.mount = mountpoint;
+    args.port = port;
+    args.user = user;
+    args.password = password;
+
     char buf[MAXDATASIZE];
 
     if(!(he=gethostbyname(args.server))) {
@@ -75,6 +65,7 @@ int ntripConnect() {
     } else {
         i=snprintf(buf, MAXDATASIZE-40, /* leave some space for login */
             "GET /%s HTTP/1.1\r\n"
+            // "Ntrip-Version: Ntrip/2.0\r\n"
             "User-Agent: %s/%s\r\n"
             // "Accept: */*\r\n"
             // "Connection: close \r\n"
@@ -91,31 +82,35 @@ int ntripConnect() {
         }
         snprintf(buf+i, 5, "\r\n\r\n");
         i += 5;
-        // snprintf(buf+i, 75, "$GPGGA,122724.00,5104.07582,N,00337.45089,E,1,12,0.54,13.8,M,46.0,M,,*4D\r\n");
-        // i += 75;
     }
     if(send(sockfd, buf, i, 0) != i) {
         perror("send");
         return -1;
     }
+    
+    return 0;
+}
+
+void socketcallback() {
     if(args.mount) {
         int k = 0;
         while((numbytes=recv(sockfd, buf, MAXDATASIZE-1, 0)) != -1) {
             if(!k) {
                 if(numbytes != 14 || strncmp("ICY 200 OK\r\n", buf, 12)) {
                     fprintf(stderr, "Could not get the requested mount\n");
-                    return -1;
                 }
                 ++k;
                 printf("%s\r\n",buf);
             }
             else {
-                printf("numbytes %d\r\n", numbytes);
-                fwrite(buf, numbytes, 1, stdout);
+                // print incomming data
+                printf("numbytes %d received\r\n", numbytes);
             }
         }
+        printf("End of fun!\n");
     }
     else {
+        // print SOURCETABLE
         while((numbytes=recv(sockfd, buf, MAXDATASIZE-1, 0)) != -1) {
             fwrite(buf, numbytes, 1, stdout);
             if(!strncmp("ENDSOURCETABLE\r\n", buf+numbytes-16, 16))
@@ -123,6 +118,18 @@ int ntripConnect() {
         }
     }
     close(sockfd);
-    
+}
+
+int sendGGA(const char* data, int size) {
+    if (sockfd == -1) {
+        perror("no connection");
+        return -1;
+    } else {
+        if(send(sockfd, data, size, 0) != size) {
+            perror("send");
+            return -1;
+        }
+    }
+
     return 0;
 }

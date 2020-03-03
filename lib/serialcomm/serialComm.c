@@ -33,8 +33,8 @@ void initSerialComm(const char* portname) {
     tty.c_cc[VMIN] = 0;
 
     // Set in/out baud rate to be 9600
-    cfsetispeed(&tty, B57600);
-    cfsetospeed(&tty, B57600);
+    cfsetispeed(&tty, B38400); // instead of B57600
+    cfsetospeed(&tty, B38400); // instead of B57600
 
     // Save tty settings, also checking for error
     if (tcsetattr(serial_port, TCSANOW, &tty) != 0) {

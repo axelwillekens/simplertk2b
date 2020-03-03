@@ -1,1 +1,1 @@
-/usr/bin/g++-8  -g  -rdynamic CMakeFiles/simplertk2b.dir/main.cpp.o  -o simplertk2b libserialComm.a libntrip.a 
+/usr/bin/g++-8  -g  -rdynamic CMakeFiles/simplertk2b.dir/main.cpp.o  -o simplertk2b libserialComm.a libntrip.a -lpthread 

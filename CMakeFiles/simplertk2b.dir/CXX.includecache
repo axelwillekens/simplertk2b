@@ -51,6 +51,10 @@ iostream
 -
 string
 -
+thread
+-
+chrono
+-
 lib/serialcomm/serialComm.h
 /home/axelilvo/simplertk2b/lib/serialcomm/serialComm.h
 lib/ntrip/ntrip.h

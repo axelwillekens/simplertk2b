@@ -14,6 +14,6 @@ add_library(serialComm ${serialcommfiles})
 add_library(ntrip ${ntripfiles})
 
 add_executable(simplertk2b main.cpp)
-target_link_libraries(simplertk2b serialComm ntrip)
+target_link_libraries(simplertk2b serialComm ntrip pthread)
 
 add_compile_options(-std=gnu99)

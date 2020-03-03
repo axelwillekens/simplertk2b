@@ -14,9 +14,11 @@
 #include "../serialcomm/serialComm.h"
 
 /* The string, which is send as agent in HTTP request */
-#define AGENTSTRING "NTRIP LinuxClient"
-#define REVISIONSTRING "1.51"
-#define MAXDATASIZE 1000 /* max number of bytes we can get at once */
+// #define AGENTSTRING "NTRIP LinuxClient"
+// #define REVISIONSTRING "1.51"
+#define AGENTSTRING "NTRIP LefebureNTRIPClient"
+#define REVISIONSTRING "20131124"
+#define MAXDATASIZE 2024 /* max number of bytes we can get at once */
 
 struct Args {
     char *server;
@@ -41,8 +43,8 @@ static char encodingTable [64] = {
 struct Args args;
 int encode(char *buf, int size, char *user, char *pwd);
 
-void initNtrip(char* server, char* mountpoint, int port, char* user, char* password);
-void initNtripDefault();
-int ntripConnect();
+int connectNtrip(char* server, char* mountpoint, int port, char* user, char* password);
+int sendGGA(const char* data, int size);
+void socketcallback();
 
 #endif
