@@ -2,7 +2,7 @@
 
 /* does not buffer overrun, but breaks directly after an error */
 /* returns the number of required bytes */
-int encode(char *buf, int size, char *user, char *pwd) {
+int encode(char *buf, int size, const char *user, const char *pwd) {
     unsigned char inbuf[3];
     char *out = buf;
     int i, sep = 0, fill = 0, bytes = 0;
@@ -29,14 +29,15 @@ int encode(char *buf, int size, char *user, char *pwd) {
     return bytes;
 }
 
-int connectNtrip(char* server, char* mountpoint, int port, char* user, char* password) {
+int connectNtrip(const char* server, const char* mountpoint, int port, const char* user, const char* password) {
     args.server = server;
     args.mount = mountpoint;
     args.port = port;
     args.user = user;
     args.password = password;
 
-    char buf[MAXDATASIZE];
+    char bufsend[MAXDATASIZESEND];
+    emptybuf(&bufsend, MAXDATASIZESEND);
 
     if(!(he=gethostbyname(args.server))) {
         perror("gethostbyname-blabla");
@@ -55,7 +56,7 @@ int connectNtrip(char* server, char* mountpoint, int port, char* user, char* pas
         return -1;
     }
     if(!args.mount) {
-        i = snprintf(buf, MAXDATASIZE,
+        i = snprintf(bufsend, MAXDATASIZESEND,
         "GET / HTTP/1.1\r\n"
         "User-Agent: %s/%s\r\n"
         "Accept: */*\r\n"
@@ -63,7 +64,7 @@ int connectNtrip(char* server, char* mountpoint, int port, char* user, char* pas
         "\r\n"
         , AGENTSTRING, REVISIONSTRING);
     } else {
-        i=snprintf(buf, MAXDATASIZE-40, /* leave some space for login */
+        i=snprintf(bufsend, MAXDATASIZESEND-40, /* leave some space for login */
             "GET /%s HTTP/1.1\r\n"
             // "Ntrip-Version: Ntrip/2.0\r\n"
             "User-Agent: %s/%s\r\n"
@@ -71,19 +72,19 @@ int connectNtrip(char* server, char* mountpoint, int port, char* user, char* pas
             // "Connection: close \r\n"
             "Authorization: Basic "
             , args.mount, AGENTSTRING, REVISIONSTRING);
-        if(i > MAXDATASIZE-40 && i < 0) /* second check for old glibc */ {
+        if(i > MAXDATASIZESEND-40 && i < 0) /* second check for old glibc */ {
             fprintf(stderr, "Requested mount too long\n");
             return -1;
         }
-        i += encode(buf+i, MAXDATASIZE-i-5, args.user, args.password);
-        if(i > MAXDATASIZE-5) {
+        i += encode(bufsend+i, MAXDATASIZESEND-i-5, args.user, args.password);
+        if(i > MAXDATASIZESEND-5) {
             fprintf(stderr, "Username and/or password too long\n");
             return -1;
         }
-        snprintf(buf+i, 5, "\r\n\r\n");
+        snprintf(bufsend+i, 5, "\r\n\r\n");
         i += 5;
     }
-    if(send(sockfd, buf, i, 0) != i) {
+    if(send(sockfd, bufsend, i, 0) != i) {
         perror("send");
         return -1;
     }
@@ -92,29 +93,32 @@ int connectNtrip(char* server, char* mountpoint, int port, char* user, char* pas
 }
 
 void socketcallback() {
+    char bufrecv[MAXDATASIZERCV];
+    emptybuf(&bufrecv, MAXDATASIZERCV);
+
     if(args.mount) {
         int k = 0;
-        while((numbytes=recv(sockfd, buf, MAXDATASIZE-1, 0)) != -1) {
+        while((numbytes=recv(sockfd, bufrecv, MAXDATASIZERCV-1, 0)) != -1) {
             if(!k) {
-                if(numbytes != 14 || strncmp("ICY 200 OK\r\n", buf, 12)) {
+                if(numbytes != 14 || strncmp("ICY 200 OK\r\n", bufrecv, 12)) {
                     fprintf(stderr, "Could not get the requested mount\n");
                 }
                 ++k;
-                printf("%s\r\n",buf);
+                printf("%s\r\n",bufrecv);
             }
             else {
                 // print incomming data
                 printf("numbytes %d received\r\n", numbytes);
             }
+            emptybuf(&bufrecv, MAXDATASIZERCV);
         }
         printf("End of fun!\n");
     }
     else {
         // print SOURCETABLE
-        while((numbytes=recv(sockfd, buf, MAXDATASIZE-1, 0)) != -1) {
-            fwrite(buf, numbytes, 1, stdout);
-            if(!strncmp("ENDSOURCETABLE\r\n", buf+numbytes-16, 16))
-            break;
+        while((numbytes=recv(sockfd, bufrecv, MAXDATASIZERCV-1, 0)) != -1) {
+            fwrite(bufrecv, numbytes, 1, stdout);
+            if(!strncmp("ENDSOURCETABLE\r\n", bufrecv+numbytes-16, 16)) { break; }
         }
     }
     close(sockfd);
@@ -132,4 +136,10 @@ int sendGGA(const char* data, int size) {
     }
 
     return 0;
+}
+
+void emptybuf(char* buf, int size) {
+    for (int i=0; i < size; i++) {
+        buf[i] = '\0';
+    }
 }

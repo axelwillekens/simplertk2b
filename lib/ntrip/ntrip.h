@@ -18,18 +18,19 @@
 // #define REVISIONSTRING "1.51"
 #define AGENTSTRING "NTRIP LefebureNTRIPClient"
 #define REVISIONSTRING "20131124"
-#define MAXDATASIZE 2024 /* max number of bytes we can get at once */
+#define MAXDATASIZESEND 1000 /* max number of bytes we can get at once */
+#define MAXDATASIZERCV 2024 /* max number of bytes we can get at once */
+
 
 struct Args {
-    char *server;
+    const char *server;
     int port;
-    char *user;
-    char *password;
-    char *mount;
+    const char *user;
+    const char *password;
+    const char *mount;
 };
 
 int i, sockfd, numbytes;
-char buf[MAXDATASIZE];
 struct hostent *he;
 struct sockaddr_in their_addr; /* connector's address information */
 
@@ -41,10 +42,11 @@ static char encodingTable [64] = {
 };
 
 struct Args args;
-int encode(char *buf, int size, char *user, char *pwd);
+int encode(char *buf, int size, const char *user, const char *pwd);
 
-int connectNtrip(char* server, char* mountpoint, int port, char* user, char* password);
+int connectNtrip(const char* server, const char* mountpoint, int port, const char* user, const char* password);
 int sendGGA(const char* data, int size);
 void socketcallback();
+void emptybuf(char* buf, int size);
 
 #endif

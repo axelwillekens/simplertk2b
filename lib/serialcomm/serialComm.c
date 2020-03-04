@@ -92,8 +92,8 @@ int readLineSerialPort(nmealine* line_ptr) {
 }
 
 // Write to serial port
-void WriteSerialPort(unsigned char* msg) {
-    write(serial_port, msg, sizeof(msg));
+void WriteSerialPort(unsigned char* msg, int size) {
+    write(serial_port, msg, size);
 }
 
 // Close the serial port

@@ -63,8 +63,8 @@ CMAKE_BINARY_DIR = /home/axelilvo/simplertk2b
 # Target rules for target CMakeFiles/simplertk2b.dir
 
 # All Build rule for target.
-CMakeFiles/simplertk2b.dir/all: CMakeFiles/ntrip.dir/all
 CMakeFiles/simplertk2b.dir/all: CMakeFiles/serialComm.dir/all
+CMakeFiles/simplertk2b.dir/all: CMakeFiles/ntrip.dir/all
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/depend
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=5,6 "Built target simplertk2b"

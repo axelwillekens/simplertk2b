@@ -26,7 +26,7 @@ struct termios tty;
 
 void initSerialComm(const char*);
 int readLineSerialPort(nmealine* line_ptr);
-void WriteSerialPort(unsigned char*);
+void WriteSerialPort(unsigned char* msg, int size);
 void CloseSerialPort();
 int checksumcheck(nmealine*, int);
 
