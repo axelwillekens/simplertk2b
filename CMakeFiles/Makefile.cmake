@@ -42,7 +42,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/gps.dir/DependInfo.cmake"
   "CMakeFiles/simplertk2b.dir/DependInfo.cmake"
-  "CMakeFiles/serialComm.dir/DependInfo.cmake"
-  "CMakeFiles/ntrip.dir/DependInfo.cmake"
   )

@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/axelilvo/simplertk2b
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named gps
+
+# Build rule for target.
+gps: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gps
+.PHONY : gps
+
+# fast build rule for target.
+gps/fast:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/build
+.PHONY : gps/fast
+
+#=============================================================================
 # Target rules for targets named simplertk2b
 
 # Build rule for target.
@@ -123,85 +136,86 @@ simplertk2b/fast:
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
 .PHONY : simplertk2b/fast
 
-#=============================================================================
-# Target rules for targets named serialComm
+gps/ntrip/ntrip.o: gps/ntrip/ntrip.c.o
 
-# Build rule for target.
-serialComm: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 serialComm
-.PHONY : serialComm
-
-# fast build rule for target.
-serialComm/fast:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/build
-.PHONY : serialComm/fast
-
-#=============================================================================
-# Target rules for targets named ntrip
-
-# Build rule for target.
-ntrip: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ntrip
-.PHONY : ntrip
-
-# fast build rule for target.
-ntrip/fast:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/build
-.PHONY : ntrip/fast
-
-lib/ntrip/ntrip.o: lib/ntrip/ntrip.c.o
-
-.PHONY : lib/ntrip/ntrip.o
+.PHONY : gps/ntrip/ntrip.o
 
 # target to build an object file
-lib/ntrip/ntrip.c.o:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.o
-.PHONY : lib/ntrip/ntrip.c.o
+gps/ntrip/ntrip.c.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o
+.PHONY : gps/ntrip/ntrip.c.o
 
-lib/ntrip/ntrip.i: lib/ntrip/ntrip.c.i
+gps/ntrip/ntrip.i: gps/ntrip/ntrip.c.i
 
-.PHONY : lib/ntrip/ntrip.i
+.PHONY : gps/ntrip/ntrip.i
 
 # target to preprocess a source file
-lib/ntrip/ntrip.c.i:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.i
-.PHONY : lib/ntrip/ntrip.c.i
+gps/ntrip/ntrip.c.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/ntrip/ntrip.c.i
+.PHONY : gps/ntrip/ntrip.c.i
 
-lib/ntrip/ntrip.s: lib/ntrip/ntrip.c.s
+gps/ntrip/ntrip.s: gps/ntrip/ntrip.c.s
 
-.PHONY : lib/ntrip/ntrip.s
+.PHONY : gps/ntrip/ntrip.s
 
 # target to generate assembly for a file
-lib/ntrip/ntrip.c.s:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/lib/ntrip/ntrip.c.s
-.PHONY : lib/ntrip/ntrip.c.s
+gps/ntrip/ntrip.c.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/ntrip/ntrip.c.s
+.PHONY : gps/ntrip/ntrip.c.s
 
-lib/serialcomm/serialComm.o: lib/serialcomm/serialComm.c.o
+gps/serialcomm/serialComm.o: gps/serialcomm/serialComm.c.o
 
-.PHONY : lib/serialcomm/serialComm.o
+.PHONY : gps/serialcomm/serialComm.o
 
 # target to build an object file
-lib/serialcomm/serialComm.c.o:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.o
-.PHONY : lib/serialcomm/serialComm.c.o
+gps/serialcomm/serialComm.c.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.o
+.PHONY : gps/serialcomm/serialComm.c.o
 
-lib/serialcomm/serialComm.i: lib/serialcomm/serialComm.c.i
+gps/serialcomm/serialComm.i: gps/serialcomm/serialComm.c.i
 
-.PHONY : lib/serialcomm/serialComm.i
+.PHONY : gps/serialcomm/serialComm.i
 
 # target to preprocess a source file
-lib/serialcomm/serialComm.c.i:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.i
-.PHONY : lib/serialcomm/serialComm.c.i
+gps/serialcomm/serialComm.c.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.i
+.PHONY : gps/serialcomm/serialComm.c.i
 
-lib/serialcomm/serialComm.s: lib/serialcomm/serialComm.c.s
+gps/serialcomm/serialComm.s: gps/serialcomm/serialComm.c.s
 
-.PHONY : lib/serialcomm/serialComm.s
+.PHONY : gps/serialcomm/serialComm.s
 
 # target to generate assembly for a file
-lib/serialcomm/serialComm.c.s:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/lib/serialcomm/serialComm.c.s
-.PHONY : lib/serialcomm/serialComm.c.s
+gps/serialcomm/serialComm.c.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.s
+.PHONY : gps/serialcomm/serialComm.c.s
+
+gps/simplertk2b/simplertk2b.o: gps/simplertk2b/simplertk2b.cpp.o
+
+.PHONY : gps/simplertk2b/simplertk2b.o
+
+# target to build an object file
+gps/simplertk2b/simplertk2b.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o
+.PHONY : gps/simplertk2b/simplertk2b.cpp.o
+
+gps/simplertk2b/simplertk2b.i: gps/simplertk2b/simplertk2b.cpp.i
+
+.PHONY : gps/simplertk2b/simplertk2b.i
+
+# target to preprocess a source file
+gps/simplertk2b/simplertk2b.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.i
+.PHONY : gps/simplertk2b/simplertk2b.cpp.i
+
+gps/simplertk2b/simplertk2b.s: gps/simplertk2b/simplertk2b.cpp.s
+
+.PHONY : gps/simplertk2b/simplertk2b.s
+
+# target to generate assembly for a file
+gps/simplertk2b/simplertk2b.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.s
+.PHONY : gps/simplertk2b/simplertk2b.cpp.s
 
 main.o: main.cpp.o
 
@@ -236,17 +250,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... gps"
 	@echo "... simplertk2b"
-	@echo "... serialComm"
-	@echo "... ntrip"
-	@echo "... lib/ntrip/ntrip.o"
-	@echo "... lib/ntrip/ntrip.i"
-	@echo "... lib/ntrip/ntrip.s"
-	@echo "... lib/serialcomm/serialComm.o"
-	@echo "... lib/serialcomm/serialComm.i"
-	@echo "... lib/serialcomm/serialComm.s"
+	@echo "... gps/ntrip/ntrip.o"
+	@echo "... gps/ntrip/ntrip.i"
+	@echo "... gps/ntrip/ntrip.s"
+	@echo "... gps/serialcomm/serialComm.o"
+	@echo "... gps/serialcomm/serialComm.i"
+	@echo "... gps/serialcomm/serialComm.s"
+	@echo "... gps/simplertk2b/simplertk2b.o"
+	@echo "... gps/simplertk2b/simplertk2b.i"
+	@echo "... gps/simplertk2b/simplertk2b.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

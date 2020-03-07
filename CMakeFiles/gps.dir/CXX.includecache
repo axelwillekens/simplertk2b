@@ -46,6 +46,10 @@ termios.h
 unistd.h
 -
 
+/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.cpp
+simplertk2b.h
+/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
+
 /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
 ../serialcomm/serialComm.h
 /home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
@@ -59,8 +63,4 @@ thread
 -
 chrono
 -
-
-/home/axelilvo/simplertk2b/main.cpp
-gps/simplertk2b/simplertk2b.h
-/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
 

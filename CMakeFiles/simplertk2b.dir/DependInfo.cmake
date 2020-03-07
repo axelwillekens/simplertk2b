@@ -14,8 +14,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/axelilvo/simplertk2b/CMakeFiles/serialComm.dir/DependInfo.cmake"
-  "/home/axelilvo/simplertk2b/CMakeFiles/ntrip.dir/DependInfo.cmake"
+  "/home/axelilvo/simplertk2b/CMakeFiles/gps.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -188,10 +188,7 @@ Project_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b
 Project_SOURCE_DIR:STATIC=/home/axelilvo/simplertk2b
 
 //Dependencies for target
-ntrip_LIB_DEPENDS:STATIC=
-
-//Dependencies for target
-serialComm_LIB_DEPENDS:STATIC=
+gps_LIB_DEPENDS:STATIC=
 
 
 ########################

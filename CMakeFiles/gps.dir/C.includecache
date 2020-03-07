@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/axelilvo/simplertk2b/gps/ntrip/ntrip.c
+ntrip.h
+/home/axelilvo/simplertk2b/gps/ntrip/ntrip.h
+
 /home/axelilvo/simplertk2b/gps/ntrip/ntrip.h
 getopt.h
 -
@@ -30,6 +34,10 @@ sys/socket.h
 ../serialcomm/serialComm.h
 /home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
 
+/home/axelilvo/simplertk2b/gps/serialcomm/serialComm.c
+serialComm.h
+/home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
+
 /home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
 stdio.h
 -
@@ -45,22 +53,4 @@ termios.h
 -
 unistd.h
 -
-
-/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
-../serialcomm/serialComm.h
-/home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
-../ntrip/ntrip.h
-/home/axelilvo/simplertk2b/gps/ntrip/ntrip.h
-iostream
--
-string
--
-thread
--
-chrono
--
-
-/home/axelilvo/simplertk2b/main.cpp
-gps/simplertk2b/simplertk2b.h
-/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
 

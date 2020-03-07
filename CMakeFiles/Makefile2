@@ -60,11 +60,47 @@ CMAKE_SOURCE_DIR = /home/axelilvo/simplertk2b
 CMAKE_BINARY_DIR = /home/axelilvo/simplertk2b
 
 #=============================================================================
+# Target rules for target CMakeFiles/gps.dir
+
+# All Build rule for target.
+CMakeFiles/gps.dir/all:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/depend
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=1,2,3,4 "Built target gps"
+.PHONY : CMakeFiles/gps.dir/all
+
+# Include target in all.
+all: CMakeFiles/gps.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/gps.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gps.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 0
+.PHONY : CMakeFiles/gps.dir/rule
+
+# Convenience name for target.
+gps: CMakeFiles/gps.dir/rule
+
+.PHONY : gps
+
+# clean rule for target.
+CMakeFiles/gps.dir/clean:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/clean
+.PHONY : CMakeFiles/gps.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/gps.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/simplertk2b.dir
 
 # All Build rule for target.
-CMakeFiles/simplertk2b.dir/all: CMakeFiles/serialComm.dir/all
-CMakeFiles/simplertk2b.dir/all: CMakeFiles/ntrip.dir/all
+CMakeFiles/simplertk2b.dir/all: CMakeFiles/gps.dir/all
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/depend
 	$(MAKE) -f CMakeFiles/simplertk2b.dir/build.make CMakeFiles/simplertk2b.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=5,6 "Built target simplertk2b"
@@ -94,80 +130,6 @@ CMakeFiles/simplertk2b.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/simplertk2b.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/serialComm.dir
-
-# All Build rule for target.
-CMakeFiles/serialComm.dir/all:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/depend
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=3,4 "Built target serialComm"
-.PHONY : CMakeFiles/serialComm.dir/all
-
-# Include target in all.
-all: CMakeFiles/serialComm.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/serialComm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/serialComm.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 0
-.PHONY : CMakeFiles/serialComm.dir/rule
-
-# Convenience name for target.
-serialComm: CMakeFiles/serialComm.dir/rule
-
-.PHONY : serialComm
-
-# clean rule for target.
-CMakeFiles/serialComm.dir/clean:
-	$(MAKE) -f CMakeFiles/serialComm.dir/build.make CMakeFiles/serialComm.dir/clean
-.PHONY : CMakeFiles/serialComm.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/serialComm.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/ntrip.dir
-
-# All Build rule for target.
-CMakeFiles/ntrip.dir/all:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/depend
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=1,2 "Built target ntrip"
-.PHONY : CMakeFiles/ntrip.dir/all
-
-# Include target in all.
-all: CMakeFiles/ntrip.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/ntrip.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ntrip.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/axelilvo/simplertk2b/CMakeFiles 0
-.PHONY : CMakeFiles/ntrip.dir/rule
-
-# Convenience name for target.
-ntrip: CMakeFiles/ntrip.dir/rule
-
-.PHONY : ntrip
-
-# clean rule for target.
-CMakeFiles/ntrip.dir/clean:
-	$(MAKE) -f CMakeFiles/ntrip.dir/build.make CMakeFiles/ntrip.dir/clean
-.PHONY : CMakeFiles/ntrip.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/ntrip.dir/clean
 
 .PHONY : clean
 
