@@ -21,12 +21,12 @@ public:
     RMCnmealine();
     ~RMCnmealine();
 
-    char getStatus();
-    double getSpeed();              
-    double getAngle_deg();
-    int getDate();
-    double getMagneticvar();
-    char getDirmagneticvar();
+    char getStatus() const;
+    double getSpeed() const;              
+    double getAngle_deg() const;
+    int getDate() const;
+    double getMagneticvar() const;
+    char getDirmagneticvar() const;
 
     void setStatus(char);
     void setSpeed(double);              
@@ -36,5 +36,6 @@ public:
     void setDirmagneticvar(char);
 };
 
+std::ostream& operator<<(std::ostream& outputStream, const RMCnmealine& rmcline);
 
 #endif // RMCNMEALINE_H

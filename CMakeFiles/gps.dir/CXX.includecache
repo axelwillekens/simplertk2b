@@ -63,6 +63,8 @@ nmealine.h
 /home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.h
 string
 -
+iostream
+-
 
 /home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.cpp
 rmcnmealine.h

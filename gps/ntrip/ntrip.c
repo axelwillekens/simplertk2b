@@ -108,7 +108,7 @@ void socketcallback(int sockfd, struct Args* args) {
     if(args->mount) {
         int k = 0;
         while((numbytes=recv(sockfd, bufrecv, MAXDATASIZERCV-1, 0)) != -1) {
-            printf("numbytes %d received \n", numbytes);
+            // printf("numbytes %d received \n", numbytes);
             if(!k) {
                 if(numbytes != 14 || strncmp("ICY 200 OK\r\n", bufrecv, 12)) {
                     fprintf(stderr, "Could not get the requested mount\n");

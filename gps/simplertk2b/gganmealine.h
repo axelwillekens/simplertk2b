@@ -32,10 +32,10 @@ public:
     GGAnmealine();
     ~GGAnmealine();
 
-    int getFix();                        
-    int getNumSats();               
-    double getDilution();
-    double getAltitude();
+    int getFix() const;                        
+    int getNumSats() const;               
+    double getDilution() const;
+    double getAltitude() const;
 
     void setFix(int);                        
     void setNumSats(int);               
@@ -43,5 +43,6 @@ public:
     void setAltitude(double);
 };
 
+std::ostream& operator<<(std::ostream& outputStream, const GGAnmealine& ggaline);
 
 #endif // GGANMEALINE_H

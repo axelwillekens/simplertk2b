@@ -2,6 +2,7 @@
 #define NMEALINE_H
 
 #include <string>
+#include <iostream>
 
 class Nmealine
 {
@@ -13,25 +14,17 @@ public:
     Nmealine();
     ~Nmealine();
 
-    int getFix_taken_time();   
-    double getLat(); 
-    char getLatorientation();
-    double getLon(); 
-    char getLonorientation(); 
-    int getFix();                        
-    int getNumSats();               
-    double getDilution();
-    double getAltitude();
+    int getFix_taken_time() const;   
+    double getLat() const; 
+    char getLatorientation() const;
+    double getLon() const; 
+    char getLonorientation() const; 
 
     void setFix_taken_time(int);   
     void setLat(double); 
     void setLatorientation(char);
     void setLon(double); 
     void setLonorientation(char); 
-    void setFix(int);                        
-    void setNumSats(int);               
-    void setDilution(double);
-    void setAltitude(double);
 };
 
 

@@ -57,8 +57,7 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         this->ntripnmealine = fullnmealine.substr(0, fullnmealine.size()-1) + "\r\n";
 
         // print data
-        std::cout.precision(10);
-        std::cout << "GGA line * Latitude: " << ggaline.getLat() << " - " << "Longitude: " << ggaline.getLon() << "\t--\t Fix: " << ggaline.getFix() << std::endl;
+        std::cout << ggaline << std::endl;
     } else if (*words.begin() == "$GNRMC") {
         RMCnmealine rmcline = RMCnmealine();
         rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
@@ -72,6 +71,9 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         rmcline.setDate(std::stoi(*(words.begin()+9)));
         rmcline.setMagneticvar((*(words.begin()+10)).c_str()[0]);
         rmcline.setDirmagneticvar((*(words.begin()+11)).c_str()[0]);
+
+        // print data
+        std::cout << rmcline << std::endl;
     }
 }
 
@@ -138,10 +140,8 @@ void serialCallback(Simplertk2b* simplertk2b) {
             if (simplertk2b->isNtripActive()) {
                 auto curtime = std::chrono::system_clock::now();
                 if (std::chrono::duration_cast<std::chrono::seconds>(curtime - simplertk2b->getStartTime()).count() > simplertk2b->getNTRIPdelay()) { // send gga string @ 0.1 Hz
-                    std::cout << "String to sent to ntrip server: " << simplertk2b->getNtripnmealine() << "A" << std::endl;
-                    std::cout << "size is: " << simplertk2b->getNtripnmealine().length() << std::endl;
                     if (sendGGA(simplertk2b->getSockfd(), simplertk2b->getNtripnmealine().c_str(), simplertk2b->getNtripnmealine().length()) == 0) {                      
-                        std::cout << "GGA string sent!\r\n" << std::endl;
+                        std::cout << "GGA string sent to ntrip server: " << simplertk2b->getNtripnmealine() << std::endl;
                         simplertk2b->setStartTime(curtime);
                         if (!simplertk2b->getFirstNTRIPsent()) {
                             simplertk2b->setNTRIPdelay(20);
