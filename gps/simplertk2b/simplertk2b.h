@@ -13,9 +13,15 @@ extern "C"{
 #endif
 
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <algorithm>
+#include <iterator>
+#include <vector>
 #include <thread>
 #include <chrono>
+
+#include <boost/algorithm/string.hpp>
 
 class Simplertk2b
 {
@@ -36,6 +42,8 @@ private:
 
     int ntripdelay;
     bool firstntripsent;
+
+    std::string ntripnmealine;
 public:
     Simplertk2b();
     Simplertk2b(std::string portname, std::string mountpoint, std::string username, std::string passwd);
@@ -53,6 +61,9 @@ public:
     void setNTRIPdelay(int);
     bool getFirstNTRIPsent();
     void setFirstNTRIPsent(bool);
+    std::string getNtripnmealine();
+
+    void processNMEAline(std::string nmealine, std::string fullnmealine);
 };
 
 void serialCallback(Simplertk2b* simplertk2b);

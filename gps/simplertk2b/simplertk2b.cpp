@@ -1,5 +1,6 @@
 #include "simplertk2b.h"
-
+#include "gganmealine.h"
+#include "rmcnmealine.h"
 
 Simplertk2b::Simplertk2b(std::string serialportname, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
     , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(3), firstntripsent(false)
@@ -33,6 +34,45 @@ Simplertk2b::~Simplertk2b() {
     CloseSerialPort(this->serial_port);  
     if (serialThread.joinable()) serialThread.join();
     if (ntripThread.joinable()) ntripThread.join();  
+}
+
+void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine) {
+    std::vector<std::string> words;
+    boost::split(words, nmealine, boost::is_any_of(","));
+
+    std::vector<std::string>::iterator i;
+    if (*words.begin() == "$GNGGA") {
+        GGAnmealine ggaline = GGAnmealine();
+        ggaline.setFix_taken_time(std::stoi(*(words.begin()+1)));
+        ggaline.setLat(std::atof((*(words.begin()+2)).c_str()));
+        ggaline.setLatorientation((*(words.begin()+3)).c_str()[0]);
+        ggaline.setLon(std::atof((*(words.begin()+4)).c_str()));
+        ggaline.setLonorientation((*(words.begin()+5)).c_str()[0]);
+        ggaline.setFix(std::stoi(*(words.begin()+6)));
+        ggaline.setNumSats(std::stoi(*(words.begin()+7)));
+        ggaline.setDilution(std::atof((*(words.begin()+8)).c_str()));
+        ggaline.setAltitude(std::atof((*(words.begin()+9)).c_str()));
+
+        // set line to sent to NTRIP server
+        this->ntripnmealine = fullnmealine + "\r\n";
+
+        // print data
+        std::cout.precision(10);
+        std::cout << "GGA line * Latitude: " << ggaline.getLat() << " - " << "Longitude: " << ggaline.getLon() << "\t--\t Fix: " << ggaline.getFix() << std::endl;
+    } else if (*words.begin() == "$GNRMC") {
+        RMCnmealine rmcline = RMCnmealine();
+        rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
+        rmcline.setStatus((*(words.begin()+2)).c_str()[0]);
+        rmcline.setLat(std::atof((*(words.begin()+3)).c_str()));
+        rmcline.setLatorientation((*(words.begin()+4)).c_str()[0]);
+        rmcline.setLon(std::atof((*(words.begin()+5)).c_str()));
+        rmcline.setLonorientation((*(words.begin()+6)).c_str()[0]);
+        rmcline.setSpeed(std::stod(*(words.begin()+7)));
+        rmcline.setAngle_deg(std::atof((*(words.begin()+8)).c_str()));
+        rmcline.setDate(std::stoi(*(words.begin()+9)));
+        rmcline.setMagneticvar((*(words.begin()+10)).c_str()[0]);
+        rmcline.setDirmagneticvar((*(words.begin()+11)).c_str()[0]);
+    }
 }
 
 bool Simplertk2b::isNtripActive() {
@@ -80,6 +120,9 @@ void Simplertk2b::setFirstNTRIPsent(bool firstntripsent) {
     this->firstntripsent = firstntripsent;
 }
 
+std::string Simplertk2b::getNtripnmealine() {
+    return this->ntripnmealine;
+}
 
 void serialCallback(Simplertk2b* simplertk2b) {
     nmealine nmealine;
@@ -88,21 +131,21 @@ void serialCallback(Simplertk2b* simplertk2b) {
     while (1) {
         ret = readLineSerialPort(simplertk2b->getSerialPort(), &nmealine);
         if (ret == 0) { // SUCCESS
-            char name[7];
-            for (int i = 0; i < 7; i++) name[i] = '\0';
-            strncpy(name, nmealine.line, 6);
-            if (strcmp(name, "$GNGGA") == 0 || strcmp(name, "$GNRMC") == 0) {
-                std::cout << "Read line: " << nmealine.line << std::endl;
-            }
-
+            // Process incoming line
+            simplertk2b->processNMEAline(nmealine.line, nmealine.fullline);
+            
+            // NTRIP 
             if (simplertk2b->isNtripActive()) {
                 auto curtime = std::chrono::system_clock::now();
                 if (std::chrono::duration_cast<std::chrono::seconds>(curtime - simplertk2b->getStartTime()).count() > simplertk2b->getNTRIPdelay()) { // send gga string @ 0.1 Hz
-                    if (sendGGA(simplertk2b->getSockfd(), "$GPGGA,122724.00,5104.07582,N,00337.45089,E,1,12,0.54,13.8,M,46.0,M,,*69\r\n", 74) == 0) {
+                    std::cout << "String to sent to ntrip server: " << simplertk2b->getNtripnmealine() << std::endl;
+                    std::cout << "size is: " << simplertk2b->getNtripnmealine().length() << std::endl;
+                    if (sendGGA(simplertk2b->getSockfd(), "$GNGGA,122724.00,5104.07582,N,00337.45089,E,1,12,0.54,13.8,M,46.0,M,,*77\r\n", 74) == 0) {
+                    // if (sendGGA(simplertk2b->getSockfd(), simplertk2b->getNtripnmealine().c_str(), simplertk2b->getNtripnmealine().length()) == 0) {                      
                         std::cout << "GGA string sent!\r\n" << std::endl;
                         simplertk2b->setStartTime(curtime);
-                        if (simplertk2b->getFirstNTRIPsent()) {
-                            simplertk2b->setNTRIPdelay(10);
+                        if (!simplertk2b->getFirstNTRIPsent()) {
+                            simplertk2b->setNTRIPdelay(20);
                             simplertk2b->setFirstNTRIPsent(false);
                         }
                     }

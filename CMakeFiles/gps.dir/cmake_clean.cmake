@@ -1,6 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.o"
   "CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o"
+  "CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o"
+  "CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o"
+  "CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o"
   "CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
   "libgps.pdb"
   "libgps.a"

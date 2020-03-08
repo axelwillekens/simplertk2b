@@ -40,6 +40,8 @@ else()
     message("ASAN disabled: To enable, run: NO_ASAN=0 cmake .")
 endif()
 
+# Compilation project
+
 file(GLOB gpsfiles
     "gps/serialcomm/*.h"
     "gps/serialcomm/*.c"
@@ -51,7 +53,12 @@ file(GLOB gpsfiles
 
 add_library(gps ${gpsfiles} )
 
-add_executable(simplertk2b main.cpp)
-target_link_libraries(simplertk2b gps pthread)
+# SET (BOOST_LIBRARYDIR "/usr/local/lib")
 
-# add_compile_options(-std=gnu99)
+find_package(Boost 1.72 REQUIRED)
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})  
+
+    add_executable(simplertk2b main.cpp)
+    target_link_libraries(simplertk2b gps pthread)
+endif()

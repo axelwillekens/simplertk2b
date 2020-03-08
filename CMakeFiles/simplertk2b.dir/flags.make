@@ -6,5 +6,5 @@ CXX_FLAGS =  -g -std=c++17 -Wall -Wno-unused-function -Wno-unused-variable -Wno-
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/usr/local/include 
 

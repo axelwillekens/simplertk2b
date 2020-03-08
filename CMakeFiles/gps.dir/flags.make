@@ -7,11 +7,11 @@ C_FLAGS =    -g -std=gnu99 -Wall -Wno-unused-function -Wno-unused-variable -Wno-
 
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/usr/local/include 
 
 CXX_FLAGS =  -g -std=c++17 -Wall -Wno-unused-function -Wno-unused-variable -Wno-comment -Wno-unknown-pragmas -fms-extensions -fdiagnostics-color -pthread -Og    -fsanitize=address -static-libasan -fno-omit-frame-pointer -g  
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/usr/local/include 
 

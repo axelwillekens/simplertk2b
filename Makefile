@@ -190,6 +190,87 @@ gps/serialcomm/serialComm.c.s:
 	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.s
 .PHONY : gps/serialcomm/serialComm.c.s
 
+gps/simplertk2b/gganmealine.o: gps/simplertk2b/gganmealine.cpp.o
+
+.PHONY : gps/simplertk2b/gganmealine.o
+
+# target to build an object file
+gps/simplertk2b/gganmealine.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o
+.PHONY : gps/simplertk2b/gganmealine.cpp.o
+
+gps/simplertk2b/gganmealine.i: gps/simplertk2b/gganmealine.cpp.i
+
+.PHONY : gps/simplertk2b/gganmealine.i
+
+# target to preprocess a source file
+gps/simplertk2b/gganmealine.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.i
+.PHONY : gps/simplertk2b/gganmealine.cpp.i
+
+gps/simplertk2b/gganmealine.s: gps/simplertk2b/gganmealine.cpp.s
+
+.PHONY : gps/simplertk2b/gganmealine.s
+
+# target to generate assembly for a file
+gps/simplertk2b/gganmealine.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.s
+.PHONY : gps/simplertk2b/gganmealine.cpp.s
+
+gps/simplertk2b/nmealine.o: gps/simplertk2b/nmealine.cpp.o
+
+.PHONY : gps/simplertk2b/nmealine.o
+
+# target to build an object file
+gps/simplertk2b/nmealine.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o
+.PHONY : gps/simplertk2b/nmealine.cpp.o
+
+gps/simplertk2b/nmealine.i: gps/simplertk2b/nmealine.cpp.i
+
+.PHONY : gps/simplertk2b/nmealine.i
+
+# target to preprocess a source file
+gps/simplertk2b/nmealine.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.i
+.PHONY : gps/simplertk2b/nmealine.cpp.i
+
+gps/simplertk2b/nmealine.s: gps/simplertk2b/nmealine.cpp.s
+
+.PHONY : gps/simplertk2b/nmealine.s
+
+# target to generate assembly for a file
+gps/simplertk2b/nmealine.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.s
+.PHONY : gps/simplertk2b/nmealine.cpp.s
+
+gps/simplertk2b/rmcnmealine.o: gps/simplertk2b/rmcnmealine.cpp.o
+
+.PHONY : gps/simplertk2b/rmcnmealine.o
+
+# target to build an object file
+gps/simplertk2b/rmcnmealine.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o
+.PHONY : gps/simplertk2b/rmcnmealine.cpp.o
+
+gps/simplertk2b/rmcnmealine.i: gps/simplertk2b/rmcnmealine.cpp.i
+
+.PHONY : gps/simplertk2b/rmcnmealine.i
+
+# target to preprocess a source file
+gps/simplertk2b/rmcnmealine.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.i
+.PHONY : gps/simplertk2b/rmcnmealine.cpp.i
+
+gps/simplertk2b/rmcnmealine.s: gps/simplertk2b/rmcnmealine.cpp.s
+
+.PHONY : gps/simplertk2b/rmcnmealine.s
+
+# target to generate assembly for a file
+gps/simplertk2b/rmcnmealine.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.s
+.PHONY : gps/simplertk2b/rmcnmealine.cpp.s
+
 gps/simplertk2b/simplertk2b.o: gps/simplertk2b/simplertk2b.cpp.o
 
 .PHONY : gps/simplertk2b/simplertk2b.o
@@ -260,6 +341,15 @@ help:
 	@echo "... gps/serialcomm/serialComm.o"
 	@echo "... gps/serialcomm/serialComm.i"
 	@echo "... gps/serialcomm/serialComm.s"
+	@echo "... gps/simplertk2b/gganmealine.o"
+	@echo "... gps/simplertk2b/gganmealine.i"
+	@echo "... gps/simplertk2b/gganmealine.s"
+	@echo "... gps/simplertk2b/nmealine.o"
+	@echo "... gps/simplertk2b/nmealine.i"
+	@echo "... gps/simplertk2b/nmealine.s"
+	@echo "... gps/simplertk2b/rmcnmealine.o"
+	@echo "... gps/simplertk2b/rmcnmealine.i"
+	@echo "... gps/simplertk2b/rmcnmealine.s"
 	@echo "... gps/simplertk2b/simplertk2b.o"
 	@echo "... gps/simplertk2b/simplertk2b.i"
 	@echo "... gps/simplertk2b/simplertk2b.s"

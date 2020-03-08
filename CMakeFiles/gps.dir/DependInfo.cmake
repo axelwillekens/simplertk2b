@@ -12,14 +12,19 @@ set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  "/usr/local/include"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o"
+  "/home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o"
+  "/home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o"
   "/home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.cpp" "/home/axelilvo/simplertk2b/CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

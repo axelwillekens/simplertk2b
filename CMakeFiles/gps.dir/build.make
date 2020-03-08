@@ -105,9 +105,81 @@ CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o.provides: CMakeFiles/gps.dir/gps/ntrip/nt
 CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o.provides.build: CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o
 
 
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o: CMakeFiles/gps.dir/flags.make
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o: gps/simplertk2b/gganmealine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o"
+	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o -c /home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.cpp
+
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.i"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.cpp > CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.i
+
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.s"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.cpp -o CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.s
+
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.requires:
+
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.requires
+
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.provides: CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.provides.build
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.provides
+
+CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.provides.build: CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o
+
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o: CMakeFiles/gps.dir/flags.make
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o: gps/simplertk2b/nmealine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o"
+	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o -c /home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.cpp
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.i"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.cpp > CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.i
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.s"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.cpp -o CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.s
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.requires:
+
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.requires
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.provides: CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.provides.build
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.provides
+
+CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.provides.build: CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o
+
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o: CMakeFiles/gps.dir/flags.make
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o: gps/simplertk2b/rmcnmealine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o"
+	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o -c /home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.cpp
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.i"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.cpp > CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.i
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.s"
+	/usr/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.cpp -o CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.s
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.requires:
+
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.requires
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.provides: CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.provides.build
+.PHONY : CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.provides
+
+CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.provides.build: CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o
+
+
 CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o: CMakeFiles/gps.dir/flags.make
 CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o: gps/simplertk2b/simplertk2b.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
 	/usr/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o -c /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.cpp
 
 CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.i: cmake_force
@@ -133,6 +205,9 @@ CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o.provides.build: CMakeFiles/
 gps_OBJECTS = \
 "CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.o" \
 "CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o" \
+"CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o" \
+"CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o" \
+"CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o" \
 "CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
 
 # External object files for target gps
@@ -140,10 +215,13 @@ gps_EXTERNAL_OBJECTS =
 
 libgps.a: CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.o
 libgps.a: CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o
+libgps.a: CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o
+libgps.a: CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o
+libgps.a: CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o
 libgps.a: CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o
 libgps.a: CMakeFiles/gps.dir/build.make
 libgps.a: CMakeFiles/gps.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libgps.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libgps.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/gps.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gps.dir/link.txt --verbose=$(VERBOSE)
 
@@ -154,6 +232,9 @@ CMakeFiles/gps.dir/build: libgps.a
 
 CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/serialcomm/serialComm.c.o.requires
 CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/ntrip/ntrip.c.o.requires
+CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/simplertk2b/gganmealine.cpp.o.requires
+CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/simplertk2b/nmealine.cpp.o.requires
+CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o.requires
 CMakeFiles/gps.dir/requires: CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o.requires
 
 .PHONY : CMakeFiles/gps.dir/requires

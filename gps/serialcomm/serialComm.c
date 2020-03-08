@@ -91,8 +91,6 @@ int readLineSerialPort(int serial_port, nmealine* line_ptr) {
         num_bytes = read(serial_port, &readchar, sizeof(char));
         i++;
     }
-    line_ptr->fullline[line_ptr->size+i+1] = '\r';
-    line_ptr->fullline[line_ptr->size+i+2] = '\n';
 
     if (checksumcheck(line_ptr, (int)strtol(checksumbuf, NULL, 16)) < 0) {
         fprintf(stderr, "Bad line: Checksum does not match! \n");
