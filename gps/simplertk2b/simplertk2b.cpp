@@ -3,7 +3,7 @@
 #include "rmcnmealine.h"
 
 Simplertk2b::Simplertk2b(std::string serialportname, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
-    , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(3), firstntripsent(false)
+    , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(4), firstntripsent(false)
 {
     // Init of NTRIP server
     struct Args args = {0};
@@ -54,7 +54,7 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         ggaline.setAltitude(std::atof((*(words.begin()+9)).c_str()));
 
         // set line to sent to NTRIP server
-        this->ntripnmealine = fullnmealine + "\r\n";
+        this->ntripnmealine = fullnmealine.substr(0, fullnmealine.size()-1) + "\r\n";
 
         // print data
         std::cout.precision(10);
@@ -138,10 +138,9 @@ void serialCallback(Simplertk2b* simplertk2b) {
             if (simplertk2b->isNtripActive()) {
                 auto curtime = std::chrono::system_clock::now();
                 if (std::chrono::duration_cast<std::chrono::seconds>(curtime - simplertk2b->getStartTime()).count() > simplertk2b->getNTRIPdelay()) { // send gga string @ 0.1 Hz
-                    std::cout << "String to sent to ntrip server: " << simplertk2b->getNtripnmealine() << std::endl;
+                    std::cout << "String to sent to ntrip server: " << simplertk2b->getNtripnmealine() << "A" << std::endl;
                     std::cout << "size is: " << simplertk2b->getNtripnmealine().length() << std::endl;
-                    if (sendGGA(simplertk2b->getSockfd(), "$GNGGA,122724.00,5104.07582,N,00337.45089,E,1,12,0.54,13.8,M,46.0,M,,*77\r\n", 74) == 0) {
-                    // if (sendGGA(simplertk2b->getSockfd(), simplertk2b->getNtripnmealine().c_str(), simplertk2b->getNtripnmealine().length()) == 0) {                      
+                    if (sendGGA(simplertk2b->getSockfd(), simplertk2b->getNtripnmealine().c_str(), simplertk2b->getNtripnmealine().length()) == 0) {                      
                         std::cout << "GGA string sent!\r\n" << std::endl;
                         simplertk2b->setStartTime(curtime);
                         if (!simplertk2b->getFirstNTRIPsent()) {
