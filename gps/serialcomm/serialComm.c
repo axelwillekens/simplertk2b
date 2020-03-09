@@ -111,7 +111,7 @@ void WriteSerialPort(int serial_port, char* msg, int size) {
     if ((numbytes = write(serial_port, msg, size)) != size) {
         fprintf(stderr, "Write to serial port failed! \n");
     } else {
-        printf("%d bytes written to simplertk2b\n",numbytes);
+        fprintf(stdout, "%d bytes written to simplertk2b\n",numbytes);
     }
     
 }

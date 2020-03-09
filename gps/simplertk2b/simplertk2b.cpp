@@ -19,12 +19,15 @@ Simplertk2b::Simplertk2b(std::string serialportname, std::string mountpoint, std
         std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     } else {
         std::cerr << "Connection with NTRIP server failed! See above error for more info." << std::endl;
+        std::cerr << "Check your internet connection (firewalls may be blocking the TCP connection." << std::endl;
+        std::cerr << "Check if your NTRIP account settings are correct." << std::endl;
     }
 
     // Init Serial Port
     this->setSerialPort(initSerialComm(portname.c_str()));
     if (this->serial_port == -1) {
         std::cerr << "Cannot make a connection on this port" << std::endl;
+        std::cerr << "Check if your serial port is correct" << std::endl;
     } else {
         serialThread = std::thread(serialCallback, this);
     }
@@ -151,7 +154,7 @@ void serialCallback(Simplertk2b* simplertk2b) {
                 }
             }
         } else if (ret == -1) { // Init Serial port again!
-            std::cerr << "file descriptor failed init new one!" << std::endl;
+            std::cerr << "File descriptor failed created new one!" << std::endl;
             int serial_port;
             if ((serial_port = initSerialComm(simplertk2b->getPortName().c_str())) == -1) {
                 std::cerr << "Cannot make a connection on this port" << std::endl;

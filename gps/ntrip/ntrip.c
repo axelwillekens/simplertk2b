@@ -42,7 +42,7 @@ int connectNtrip(struct Args* args) {
     emptybuf(bufsend, MAXDATASIZESEND);
 
     if(!(he=gethostbyname(args->server))) {
-        perror("gethostbyname-blabla");
+        perror("gethostbyname");
         return -1;
     }
     if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
