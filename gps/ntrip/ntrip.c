@@ -108,22 +108,8 @@ void socketcallback(int sockfd, struct Args* args) {
     if(args->mount) {
         int k = 0;
         while((numbytes=recv(sockfd, bufrecv, MAXDATASIZERCV-1, 0)) != -1) {
-            // printf("numbytes %d received \n", numbytes);
-            if(!k) {
-                if(numbytes != 14 || strncmp("ICY 200 OK\r\n", bufrecv, 12)) {
-                    fprintf(stderr, "Could not get the requested mount\n");
-                }
-                ++k;
-                printf("%s\r\n",bufrecv);
-            }
-            else if (numbytes > 0) {
-                // print incomming data
-                char* tosendbuf = (char*) malloc((numbytes+1) * sizeof(char));
-                strncpy(tosendbuf, bufrecv, numbytes);
-                if (serial_port != -1) {
-                    WriteSerialPort(serial_port, tosendbuf, numbytes);
-                }
-                free(tosendbuf);
+            if (serial_port != -1) {
+                WriteSerialPort(serial_port, bufrecv, numbytes);
             }
             emptybuf(bufrecv, MAXDATASIZERCV);
         }

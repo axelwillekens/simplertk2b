@@ -66,7 +66,7 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         rmcline.setLatorientation((*(words.begin()+4)).c_str()[0]);
         rmcline.setLon(std::atof((*(words.begin()+5)).c_str()));
         rmcline.setLonorientation((*(words.begin()+6)).c_str()[0]);
-        rmcline.setSpeed(std::stod(*(words.begin()+7)));
+        rmcline.setSpeed(std::atof((*(words.begin()+7)).c_str()));
         rmcline.setAngle_deg(std::atof((*(words.begin()+8)).c_str()));
         rmcline.setDate(std::stoi(*(words.begin()+9)));
         rmcline.setMagneticvar((*(words.begin()+10)).c_str()[0]);

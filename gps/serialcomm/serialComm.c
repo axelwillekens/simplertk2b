@@ -35,9 +35,8 @@ int initSerialComm(const char* portname) {
     tty.c_cc[VTIME] = 10;    // Wait for up to 1s (10 deciseconds), returning as soon as any data is received.
     tty.c_cc[VMIN] = 0;
 
-    // Set in/out baud rate to be 9600
-    cfsetispeed(&tty, B38400); // instead of B57600
-    cfsetospeed(&tty, B38400); // instead of B57600
+    cfsetispeed(&tty, B4800); // instead of B38400
+    cfsetospeed(&tty, B4800); // instead of B38400
 
     // Save tty settings, also checking for error
     if (tcsetattr(serial_port, TCSANOW, &tty) != 0) {
@@ -108,9 +107,13 @@ int readLineSerialPort(int serial_port, nmealine* line_ptr) {
 
 // Write to serial port
 void WriteSerialPort(int serial_port, char* msg, int size) {
-    if (write(serial_port, msg, size) < 0) {
+    int numbytes = 0;
+    if ((numbytes = write(serial_port, msg, size)) != size) {
         fprintf(stderr, "Write to serial port failed! \n");
+    } else {
+        printf("%d bytes written to simplertk2b\n",numbytes);
     }
+    
 }
 
 // Close the serial port
