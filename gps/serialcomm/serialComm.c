@@ -1,5 +1,8 @@
 #include "serialComm.h"
 
+// Initialization of the serial port
+// Returns serial_port if SUCCESS
+// Returns -1 if error
 int initSerialComm(const char* portname) {
     struct termios tty;
 
