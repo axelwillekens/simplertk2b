@@ -46,7 +46,7 @@ private:
     std::string ntripnmealine;
 public:
     Simplertk2b();
-    Simplertk2b(std::string portname, std::string mountpoint, std::string username, std::string passwd);
+    Simplertk2b(std::string portname, std::string server, std::string mountpoint, std::string username, std::string passwd);
     ~Simplertk2b();
 
     bool isNtripActive();

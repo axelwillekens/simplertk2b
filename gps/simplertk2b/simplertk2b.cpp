@@ -2,12 +2,12 @@
 #include "gganmealine.h"
 #include "rmcnmealine.h"
 
-Simplertk2b::Simplertk2b(std::string serialportname, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
+Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
     , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(4), firstntripsent(false)
 {
     // Init of NTRIP server
     struct Args args = {0};
-    args.server = "flepos.vlaanderen.be";
+    args.server = server.c_str();
     args.mount = mountpoint.c_str();
     args.port = 2101;
     args.user = username.c_str();
