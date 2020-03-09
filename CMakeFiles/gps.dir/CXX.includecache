@@ -79,10 +79,6 @@ nmealine.h
 /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.cpp
 simplertk2b.h
 /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
-gganmealine.h
-/home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.h
-rmcnmealine.h
-/home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.h
 
 /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
 ../serialcomm/serialComm.h
@@ -107,6 +103,10 @@ chrono
 -
 boost/algorithm/string.hpp
 -
+gganmealine.h
+/home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.h
+rmcnmealine.h
+/home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.h
 
 /usr/local/include/boost/algorithm/string.hpp
 boost/algorithm/string/std_containers_traits.hpp

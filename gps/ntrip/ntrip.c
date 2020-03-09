@@ -100,7 +100,7 @@ void updateSerial_port(int port) {
     serial_port = port;
 }
 
-void socketcallback(int sockfd, struct Args* args) {
+void socketWork(int sockfd, struct Args* args) {
     int numbytes;
     char bufrecv[MAXDATASIZERCV];
     emptybuf(bufrecv, MAXDATASIZERCV);

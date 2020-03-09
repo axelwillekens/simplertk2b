@@ -22,6 +22,8 @@ extern "C"{
 #include <chrono>
 
 #include <boost/algorithm/string.hpp>
+#include "gganmealine.h"
+#include "rmcnmealine.h"
 
 class Simplertk2b
 {
@@ -44,6 +46,9 @@ private:
     bool firstntripsent;
 
     std::string ntripnmealine;
+
+    void (*ggacallback)(GGAnmealine&);
+    void (*rmccallback)(RMCnmealine&);
 public:
     Simplertk2b();
     Simplertk2b(std::string portname, std::string server, std::string mountpoint, std::string username, std::string passwd);
@@ -63,9 +68,12 @@ public:
     void setFirstNTRIPsent(bool);
     std::string getNtripnmealine();
 
+    void setGGAcallback(void (*ggacallback)(GGAnmealine&));
+    void setRMCcallback(void (*rmccallback)(RMCnmealine&));
+
     void processNMEAline(std::string nmealine, std::string fullnmealine);
 };
 
-void serialCallback(Simplertk2b* simplertk2b);
+void serialWork(Simplertk2b* simplertk2b);
 
 #endif //SIMPLERTKB_H

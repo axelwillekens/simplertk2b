@@ -1,9 +1,8 @@
 #include "simplertk2b.h"
-#include "gganmealine.h"
-#include "rmcnmealine.h"
 
 Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
     , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(4), firstntripsent(false)
+    , ggacallback(nullptr), rmccallback(nullptr)
 {
     // Init of NTRIP server
     struct Args args = {0};
@@ -15,7 +14,7 @@ Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::st
 
     if ((this->sockfd = connectNtrip(&args)) != -1) { 
         this->ntripActive = true;
-        ntripThread = std::thread(socketcallback,this->sockfd,&args);
+        ntripThread = std::thread(socketWork,this->sockfd,&args);
         std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     } else {
         std::cerr << "Connection with NTRIP server failed! See above error for more info." << std::endl;
@@ -29,7 +28,7 @@ Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::st
         std::cerr << "Cannot make a connection on this port" << std::endl;
         std::cerr << "Check if your serial port is correct" << std::endl;
     } else {
-        serialThread = std::thread(serialCallback, this);
+        serialThread = std::thread(serialWork, this);
     }
 }
 
@@ -59,8 +58,10 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         // set line to sent to NTRIP server
         this->ntripnmealine = fullnmealine.substr(0, fullnmealine.size()-1) + "\r\n";
 
-        // print data
-        std::cout << ggaline << std::endl;
+        // initiate callback
+        if (ggacallback != nullptr) {
+            ggacallback(ggaline);
+        }
     } else if (*words.begin() == "$GNRMC") {
         RMCnmealine rmcline = RMCnmealine();
         rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
@@ -75,61 +76,40 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         rmcline.setMagneticvar((*(words.begin()+10)).c_str()[0]);
         rmcline.setDirmagneticvar((*(words.begin()+11)).c_str()[0]);
 
-        // print data
-        std::cout << rmcline << std::endl;
+        // initiate callback
+        if (rmccallback != nullptr) {
+            rmccallback(rmcline);
+        }
     }
 }
 
-bool Simplertk2b::isNtripActive() {
-    return this->ntripActive;
-}
+bool Simplertk2b::isNtripActive() { return this->ntripActive; }
 
-std::chrono::system_clock::time_point Simplertk2b::getStartTime() {
-    return starttime;
-}
+std::chrono::system_clock::time_point Simplertk2b::getStartTime() { return starttime; }
+void Simplertk2b::setStartTime(std::chrono::system_clock::time_point starttime) { this->starttime = starttime; }
 
-void Simplertk2b::setStartTime(std::chrono::system_clock::time_point starttime) {
-    this->starttime = starttime;
-}
-
-int Simplertk2b::getSerialPort() {
-    return this->serial_port;
-}
-
+int Simplertk2b::getSerialPort() { return this->serial_port; }
 void Simplertk2b::setSerialPort(int serial_port) {
      this->serial_port = serial_port;
      updateSerial_port(serial_port);
 }
 
-int Simplertk2b::getSockfd() {
-    return this->sockfd;
-}
+int Simplertk2b::getSockfd() { return this->sockfd; }
+std::string Simplertk2b::getPortName() { return this->portname; }
 
-int Simplertk2b::getNTRIPdelay() {
-    return this->ntripdelay;
-}
+int Simplertk2b::getNTRIPdelay() { return this->ntripdelay; }
+void Simplertk2b::setNTRIPdelay(int ntripdelay) { this->ntripdelay = ntripdelay; }
 
-void Simplertk2b::setNTRIPdelay(int ntripdelay) {
-    this->ntripdelay = ntripdelay;
-}
 
-std::string Simplertk2b::getPortName() {
-    return this->portname;
-}
+bool Simplertk2b::getFirstNTRIPsent() { return this->firstntripsent; }
+void Simplertk2b::setFirstNTRIPsent(bool firstntripsent) { this->firstntripsent = firstntripsent; }
 
-bool Simplertk2b::getFirstNTRIPsent() {
-    return this->firstntripsent;
-}
+std::string Simplertk2b::getNtripnmealine() { return this->ntripnmealine; }
 
-void Simplertk2b::setFirstNTRIPsent(bool firstntripsent) {
-    this->firstntripsent = firstntripsent;
-}
+void Simplertk2b::setGGAcallback(void (*ggacallback)(GGAnmealine&)) { this->ggacallback = ggacallback; }
+void Simplertk2b::setRMCcallback(void (*rmccallback)(RMCnmealine&)) { this->rmccallback = rmccallback; }
 
-std::string Simplertk2b::getNtripnmealine() {
-    return this->ntripnmealine;
-}
-
-void serialCallback(Simplertk2b* simplertk2b) {
+void serialWork(Simplertk2b* simplertk2b) {
     nmealine nmealine;
     int ret;
 

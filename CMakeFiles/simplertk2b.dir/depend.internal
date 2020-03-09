@@ -4,6 +4,9 @@
 CMakeFiles/simplertk2b.dir/main.cpp.o
  /home/axelilvo/simplertk2b/gps/ntrip/ntrip.h
  /home/axelilvo/simplertk2b/gps/serialcomm/serialComm.h
+ /home/axelilvo/simplertk2b/gps/simplertk2b/gganmealine.h
+ /home/axelilvo/simplertk2b/gps/simplertk2b/nmealine.h
+ /home/axelilvo/simplertk2b/gps/simplertk2b/rmcnmealine.h
  /home/axelilvo/simplertk2b/gps/simplertk2b/simplertk2b.h
  /home/axelilvo/simplertk2b/main.cpp
  /usr/local/include/boost/algorithm/string.hpp

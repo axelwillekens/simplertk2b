@@ -3,6 +3,9 @@
 
 CMakeFiles/simplertk2b.dir/main.cpp.o: gps/ntrip/ntrip.h
 CMakeFiles/simplertk2b.dir/main.cpp.o: gps/serialcomm/serialComm.h
+CMakeFiles/simplertk2b.dir/main.cpp.o: gps/simplertk2b/gganmealine.h
+CMakeFiles/simplertk2b.dir/main.cpp.o: gps/simplertk2b/nmealine.h
+CMakeFiles/simplertk2b.dir/main.cpp.o: gps/simplertk2b/rmcnmealine.h
 CMakeFiles/simplertk2b.dir/main.cpp.o: gps/simplertk2b/simplertk2b.h
 CMakeFiles/simplertk2b.dir/main.cpp.o: main.cpp
 CMakeFiles/simplertk2b.dir/main.cpp.o: /usr/local/include/boost/algorithm/string.hpp

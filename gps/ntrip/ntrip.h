@@ -41,7 +41,7 @@ int encode(char *buf, int size, const char *user, const char *pwd);
 
 int connectNtrip(struct Args* args);
 int sendGGA(int sockfd, const char* data, int size);
-void socketcallback(int sockfd, struct Args* args);
+void socketWork(int sockfd, struct Args* args);
 void emptybuf(char* buf, int size);
 void updateSerial_port(int port);
 
