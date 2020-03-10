@@ -6,7 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/gps.dir/gps/simplertk2b/rmcnmealine.cpp.o"
   "CMakeFiles/gps.dir/gps/simplertk2b/simplertk2b.cpp.o"
   "libgps.pdb"
-  "libgps.a"
+  "libgps.so"
 )
 
 # Per-language clean rules from dependency scanning.

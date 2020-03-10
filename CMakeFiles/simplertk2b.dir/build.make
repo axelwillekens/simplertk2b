@@ -90,7 +90,7 @@ simplertk2b_EXTERNAL_OBJECTS =
 
 simplertk2b: CMakeFiles/simplertk2b.dir/main.cpp.o
 simplertk2b: CMakeFiles/simplertk2b.dir/build.make
-simplertk2b: libgps.a
+simplertk2b: libgps.so
 simplertk2b: /opt/ros/melodic/lib/libroscpp.so
 simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_signals.so

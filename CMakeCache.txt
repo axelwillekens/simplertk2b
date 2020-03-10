@@ -296,8 +296,8 @@ geometry_msgs_DIR:PATH=/opt/ros/melodic/share/geometry_msgs/cmake
 //Value Computed by CMake
 gmock_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b/gtest/googlemock
 
-//Dependencies for target
-gmock_LIB_DEPENDS:STATIC=
+//Dependencies for the target
+gmock_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 gmock_SOURCE_DIR:STATIC=/usr/src/googletest/googlemock
@@ -305,8 +305,8 @@ gmock_SOURCE_DIR:STATIC=/usr/src/googletest/googlemock
 //Build all of Google Mock's own tests.
 gmock_build_tests:BOOL=OFF
 
-//Dependencies for target
-gmock_main_LIB_DEPENDS:STATIC=
+//Dependencies for the target
+gmock_main_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 googletest-distribution_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b/gtest
@@ -314,14 +314,14 @@ googletest-distribution_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b/gtest
 //Value Computed by CMake
 googletest-distribution_SOURCE_DIR:STATIC=/usr/src/googletest
 
-//Dependencies for target
-gps_LIB_DEPENDS:STATIC=
+//Dependencies for the target
+gps_LIB_DEPENDS:STATIC=general;pthread;
 
 //Value Computed by CMake
 gtest_BINARY_DIR:STATIC=/home/axelilvo/simplertk2b/gtest/googlemock/gtest
 
-//Dependencies for target
-gtest_LIB_DEPENDS:STATIC=
+//Dependencies for the target
+gtest_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 gtest_SOURCE_DIR:STATIC=/usr/src/googletest/googletest
@@ -343,7 +343,7 @@ gtest_force_shared_crt:BOOL=OFF
 gtest_hide_internal_symbols:BOOL=OFF
 
 //Dependencies for the target
-gtest_main_LIB_DEPENDS:STATIC=general;gtest;
+gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //Path to a library.
 lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
@@ -461,7 +461,11 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Have symbol pthread_create
-CMAKE_HAVE_LIBC_CREATE:INTERNAL=1
+CMAKE_HAVE_LIBC_CREATE:INTERNAL=
+//Have library pthreads
+CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
+//Have library pthread
+CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
 //Have include pthread.h
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
