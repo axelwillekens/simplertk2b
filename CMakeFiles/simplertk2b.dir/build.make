@@ -91,6 +91,25 @@ simplertk2b_EXTERNAL_OBJECTS =
 simplertk2b: CMakeFiles/simplertk2b.dir/main.cpp.o
 simplertk2b: CMakeFiles/simplertk2b.dir/build.make
 simplertk2b: libgps.a
+simplertk2b: /opt/ros/melodic/lib/libroscpp.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_signals.so
+simplertk2b: /opt/ros/melodic/lib/librosconsole.so
+simplertk2b: /opt/ros/melodic/lib/librosconsole_log4cxx.so
+simplertk2b: /opt/ros/melodic/lib/librosconsole_backend_interface.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+simplertk2b: /opt/ros/melodic/lib/libxmlrpcpp.so
+simplertk2b: /opt/ros/melodic/lib/libroscpp_serialization.so
+simplertk2b: /opt/ros/melodic/lib/librostime.so
+simplertk2b: /opt/ros/melodic/lib/libcpp_common.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_system.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libpthread.so
+simplertk2b: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 simplertk2b: CMakeFiles/simplertk2b.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/axelilvo/simplertk2b/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable simplertk2b"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simplertk2b.dir/link.txt --verbose=$(VERBOSE)

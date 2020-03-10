@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/asm-generic",
-                "/usr/include"
+                "/usr/include",
+                "/opt/ros/melodic/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

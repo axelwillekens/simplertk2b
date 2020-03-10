@@ -53,12 +53,12 @@ file(GLOB gpsfiles
 
 add_library(gps ${gpsfiles} )
 
-# SET (BOOST_LIBRARYDIR "/usr/local/lib")
 
 find_package(Boost 1.72 REQUIRED)
-if (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})  
+include_directories(${Boost_INCLUDE_DIRS})  
 
-    add_executable(simplertk2b main.cpp)
-    target_link_libraries(simplertk2b gps pthread)
-endif()
+find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs geometry_msgs)
+include_directories(${catkin_INCLUDE_DIRS})
+
+add_executable(simplertk2b main.cpp)
+target_link_libraries(simplertk2b gps pthread ${catkin_LIBRARIES})
