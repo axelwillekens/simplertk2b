@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "gps1");
     ros::NodeHandle n;
     gga_pub = n.advertise<sensor_msgs::NavSatFix>("gga_pub", 1000);
-    gga_pub = n.advertise<geometry_msgs::Vector3Stamped>("rmc_pub", 1000);
+    rmc_pub = n.advertise<geometry_msgs::Vector3Stamped>("rmc_pub", 1000);
 
     Simplertk2b simplertk2b("/dev/ttyACM0", "flepos.vlaanderen.be", "FLEPOSVRS32GREC", "852a009", "97115");
     simplertk2b.setGGAcallback(ggaNMEAcallback);

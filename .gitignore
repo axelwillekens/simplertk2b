@@ -1,2 +1,20 @@
-./build
+# executables
+libgps.*
+simplertk2b
 
+# Catkin workspace
+gps_ws/devel/
+gps_ws/build/
+
+atomic_configure/
+catkin/
+catkin_generated/
+devel/
+CTest*
+gtest/
+test_results
+cmake-build-debug
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
