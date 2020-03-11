@@ -72,7 +72,10 @@
 			"random": "cpp",
 			"set": "cpp",
 			"string_view": "cpp",
-			"variant": "cpp"
+			"variant": "cpp",
+			"unordered_set": "cpp",
+			"hash_map": "cpp",
+			"hash_set": "cpp"
 		}
 	}
 }
