@@ -1,6 +1,7 @@
 # executables
 libgps.*
 simplertk2b
+!myservice/
 
 # Catkin workspace
 gps_ws/devel/
