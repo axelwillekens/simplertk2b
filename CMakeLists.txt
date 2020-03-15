@@ -60,5 +60,5 @@ include_directories(${Boost_INCLUDE_DIRS})
 find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs geometry_msgs)
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_executable(simplertk2b main.cpp)
-target_link_libraries(simplertk2b gps ${catkin_LIBRARIES})
+add_executable(simplertk2b_noros main.cpp)
+target_link_libraries(simplertk2b_noros gps ${catkin_LIBRARIES})

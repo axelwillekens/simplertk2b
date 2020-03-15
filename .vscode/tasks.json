@@ -41,12 +41,12 @@
             "problemMatcher": []
         },
         {
-            "label": "build simplertk2b",
+            "label": "build simplertk2b_noros",
             "type": "shell",
             "command": "make",
             "args": [
                 "-j",
-                "simplertk2b"
+                "simplertk2b_noros"
             ],
             "group": {
                 "kind": "build",
@@ -62,10 +62,10 @@
             }
         },
         {
-            "label": "run simplertk2b (+ build)",
+            "label": "run simplertk2b_noros (+ build)",
             "type": "shell",
-            "command": "./simplertk2b",
-            "dependsOn": [ "build simplertk2b" ],
+            "command": "./simplertk2b_noros",
+            "dependsOn": [ "build simplertk2b_noros" ],
             "group": {
                 "kind": "build",
                 "isDefault": true

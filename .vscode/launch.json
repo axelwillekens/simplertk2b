@@ -7,10 +7,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "simplertk2b",
+            "name": "simplertk2b_noros_noros",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/simplertk2b",
+            "program": "${workspaceFolder}/simplertk2b_noros_noros",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -18,7 +18,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             "windows": {
-                "program": "${workspaceFolder}/simplertk2b.exe",
+                "program": "${workspaceFolder}/simplertk2b_noros_noros.exe",
                 "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
             },
             "setupCommands": [
@@ -29,7 +29,7 @@
                 }
             ],
             // Build the app before debugging
-            "preLaunchTask": "build simplertk2b"
+            "preLaunchTask": "build simplertk2b_noros_noros"
         }
     ]
 }
