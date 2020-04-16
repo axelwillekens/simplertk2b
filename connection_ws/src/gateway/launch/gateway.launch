@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="gateway" type="gateway" name="gateway"/>
+</launch>
+ 

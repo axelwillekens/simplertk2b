@@ -1,0 +1,2 @@
+gateway
+-DCATKIN_DEVEL_PREFIX=/home/koen_gallet/Documents/sensor-drivers/sensor-drivers/connection_ws/devel -DCMAKE_INSTALL_PREFIX=/home/koen_gallet/Documents/sensor-drivers/sensor-drivers/connection_ws/install -G Unix Makefiles

@@ -62,3 +62,4 @@ include_directories(${catkin_INCLUDE_DIRS})
 
 add_executable(simplertk2b_noros main.cpp)
 target_link_libraries(simplertk2b_noros gps ${catkin_LIBRARIES})
+
