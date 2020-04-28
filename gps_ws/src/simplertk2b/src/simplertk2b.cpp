@@ -97,10 +97,10 @@ void publishGGAline(GGAnmealine nmealine, std::string frame_id, u_int32_t& seque
 
         FLOAT x,y;
         FLOAT lat, lon;
-        if (nmealine.getLatorientation() == 'N') lat = nmealine.getLat() / 100;
-        else lat = - nmealine.getLat() / 100;
-        if (nmealine.getLonorientation() == 'E') lon = nmealine.getLon() / 100;
-        else lon = nmealine.getLon() / 100;
+        if (nmealine.getLatorientation() == 'N') lat = nmealine.getLat();
+        else lat = - nmealine.getLat();
+        if (nmealine.getLonorientation() == 'E') lon = nmealine.getLon();
+        else lon = - nmealine.getLon();
 
         LatLonToUTMXY(lat, lon, zone, x, y);
 
@@ -113,8 +113,8 @@ void publishGGAline(GGAnmealine nmealine, std::string frame_id, u_int32_t& seque
         boost::array<double,36UL> cov_matrix = {0};
         if (nmealine.getFix() == 4) { // RTK FIX
             cov_matrix[0] = std::pow(0.01,2);
-            cov_matrix[7] = std::pow(0.01,4);
-            cov_matrix[14] = std::pow(0.01,8);
+            cov_matrix[7] = std::pow(0.01,2);
+            cov_matrix[14] = std::pow(0.01,2);
         } else if(nmealine.getFix() == 5) { // RTK FLOAT
             cov_matrix[0] = std::pow(1,2);
             cov_matrix[7] = std::pow(1,2);

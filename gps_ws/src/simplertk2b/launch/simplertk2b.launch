@@ -8,5 +8,6 @@
 	<param name="pwd" value="97115" />
 	<param name="frame_gps1" value="gps_front_frame" />
 	<param name="frame_gps2" value="gps_back_frame" />
+	<param name="zone" value="31" />
 </node>
 </launch>

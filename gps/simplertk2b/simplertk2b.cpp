@@ -46,9 +46,15 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
     if (*words.begin() == "$GNGGA") {
         GGAnmealine ggaline = GGAnmealine();
         ggaline.setFix_taken_time(std::stoi(*(words.begin()+1)));
-        ggaline.setLat(std::atof((*(words.begin()+2)).c_str()));
+        std::string lat = (*(words.begin()+2)).c_str();
+        std::string lat_deg = lat.substr(0,2);
+        std::string lat_sec = lat.substr(2);
+        ggaline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
         ggaline.setLatorientation((*(words.begin()+3)).c_str()[0]);
-        ggaline.setLon(std::atof((*(words.begin()+4)).c_str()));
+        std::string lon = (*(words.begin()+4)).c_str();
+        std::string lon_deg = lon.substr(0,3);
+        std::string lon_sec = lon.substr(3);
+        ggaline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
         ggaline.setLonorientation((*(words.begin()+5)).c_str()[0]);
         ggaline.setFix(std::stoi(*(words.begin()+6)));
         ggaline.setNumSats(std::stoi(*(words.begin()+7)));
