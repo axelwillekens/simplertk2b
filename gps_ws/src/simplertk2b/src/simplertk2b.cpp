@@ -27,6 +27,9 @@ u_int32_t rmc_seq_front;
 u_int32_t gga_seq_back;
 u_int32_t rmc_seq_back;
 
+double X1,Y1,Z1;
+double X2,Y2,Z2;
+
 int main(int argc, char **argv) {
 
     ros::init(argc, argv, "gps_system");
@@ -64,6 +67,13 @@ int main(int argc, char **argv) {
     rmc_seq_front = 0;
     gga_seq_back = 0;
     rmc_seq_back = 0;
+
+    X1 = 0;
+    Y1 = 0;
+    Z1 = 0;
+    X2 = 0;
+    Y2 = 0;
+    Z2 = 0;
 }
 
 void ggaNMEAcallback_front(GGAnmealine& nmealine) {
@@ -110,16 +120,38 @@ void publishGGAline(GGAnmealine nmealine, std::string frame_id, u_int32_t& seque
 
         // Write code for euler angles
 
-        boost::array<double,36UL> cov_matrix = {0};
-        if (nmealine.getFix() == 4) { // RTK FIX
-            cov_matrix[0] = std::pow(0.01,2);
-            cov_matrix[7] = std::pow(0.01,2);
-            cov_matrix[14] = std::pow(0.01,2);
-        } else if(nmealine.getFix() == 5) { // RTK FLOAT
-            cov_matrix[0] = std::pow(1,2);
-            cov_matrix[7] = std::pow(1,2);
-            cov_matrix[14] = std::pow(1,2);
+        // store last x,y,z
+        if (frame_id.compare(frame_gps1) == 0) {
+            X1 = x; 
+            Y1 = y; 
+            Z1 = nmealine.getAltitude();
+        } else {
+            X2 = x; 
+            Y2 = y; 
+            Z2 = nmealine.getAltitude();
+        }
+
+        double delta;
+        if (nmealine.getFix() == 4) { // RTK FIX: accuracy < 1cm (1 SIGMA)
+            delta = 0.01;
+        } else if(nmealine.getFix() == 5) { // RTK FLOAT: accuracy < 10cm (1 SIGMA)
+            delta = 0.1;
         } 
+        msg.pose.pose.orientation.w = nmealine.getFix();
+
+        // Calc euler angles and their covariances
+        // msg.pose.pose.orientation.z = atan2((Y2-Y1),(X2-X1));
+        // double b = pow((X2-X1), 2) + pow((Y2-Y1), 2);
+        // msg.pose.pose.orientation.x = atan2((Z2-Z1), sqrt(b));
+
+        // Fill in covariance matrix
+        boost::array<double,36UL> cov_matrix = {0};
+        cov_matrix[0] = pow(delta,2);
+        cov_matrix[7] = pow(delta,2);
+        cov_matrix[14] = pow(delta,2);
+        // cov_matrix[21] = pow( 1/(1 + pow((Z2-Z1)/sqrt(b), 2)) , 2) * ( pow(b,-1) * (2*pow(delta, 2)) + pow(b,-3) * (pow((2*(X2-X1)), 2) * (2*pow(delta, 2)) + pow((2*(Y2-Y1)), 2) * (2*pow(delta, 2)) ) );
+        // cov_matrix[35] = pow( 1/(1 + pow((Y2-Y1)/(X2-X1), 2)) , 2) * (2* pow( (Y2-Y1)*delta/pow(X2-X1, 2) , 2) + 2 * pow( delta/(X2-X1) , 2) );
+
         msg.pose.covariance = cov_matrix;
         
         // Publish data
