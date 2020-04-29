@@ -14,4 +14,3 @@ void Nmealine::setLat(double lat) { this->lat = lat; }
 void Nmealine::setLatorientation(char latorientation) { this->latorientation = latorientation; }  
 void Nmealine::setLon(double lon) { this->lon = lon; }  
 void Nmealine::setLonorientation(char lonorientation) { this->lonorientation = lonorientation; }  
-

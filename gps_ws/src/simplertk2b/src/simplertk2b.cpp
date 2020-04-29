@@ -4,28 +4,7 @@
 #include <geometry_msgs/Vector3Stamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <math.h>
-
-#define MAX_SEQ 2^32
-
-void ggaNMEAcallback_front(GGAnmealine&);
-void rmcNMEAcallback_front(RMCnmealine&);
-void ggaNMEAcallback_back(GGAnmealine&);
-void rmcNMEAcallback_back(RMCnmealine&);
-
-void publishGGAline(GGAnmealine, std::string, u_int32_t&);
-void publishRMCline(RMCnmealine, std::string, u_int32_t&);
-
-ros::Publisher gga_pub;
-ros::Publisher rmc_pub;
-
-std::string frame_gps1;
-std::string frame_gps2;
-int zone;
-
-u_int32_t gga_seq_front;
-u_int32_t rmc_seq_front;
-u_int32_t gga_seq_back;
-u_int32_t rmc_seq_back;
+#include "simplertk2b.h"
 
 int main(int argc, char **argv) {
 
@@ -56,14 +35,21 @@ int main(int argc, char **argv) {
     simplertk2b_front.setGGAcallback(ggaNMEAcallback_front);
     simplertk2b_front.setRMCcallback(rmcNMEAcallback_front);
 
-    // Simplertk2b simplertk2b_back(port_gps2, server, mountpoint, username, pwd);
-    // simplertk2b_back.setGGAcallback(ggaNMEAcallback_back);
-    // simplertk2b_back.setRMCcallback(rmcNMEAcallback_back);
+    Simplertk2b simplertk2b_back(port_gps2, server, mountpoint, username, pwd);
+    simplertk2b_back.setGGAcallback(ggaNMEAcallback_back);
+    simplertk2b_back.setRMCcallback(rmcNMEAcallback_back);
 
     gga_seq_front = 0;
     rmc_seq_front = 0;
     gga_seq_back = 0;
     rmc_seq_back = 0;
+
+    X1 = 0;
+    Y1 = 0;
+    Z1 = 0;
+    X2 = 0;
+    Y2 = 0;
+    Z2 = 0;
 }
 
 void ggaNMEAcallback_front(GGAnmealine& nmealine) {
@@ -108,18 +94,38 @@ void publishGGAline(GGAnmealine nmealine, std::string frame_id, u_int32_t& seque
         msg.pose.pose.position.y = y;
         msg.pose.pose.position.z = nmealine.getAltitude();
 
-        // Write code for euler angles
+        // store last x,y,z
+        if (frame_id.compare(frame_gps1) == 0) {
+            X1 = x; 
+            Y1 = y; 
+            Z1 = nmealine.getAltitude();
+        } else {
+            X2 = x; 
+            Y2 = y; 
+            Z2 = nmealine.getAltitude();
+        }
 
-        boost::array<double,36UL> cov_matrix = {0};
-        if (nmealine.getFix() == 4) { // RTK FIX
-            cov_matrix[0] = std::pow(0.01,2);
-            cov_matrix[7] = std::pow(0.01,2);
-            cov_matrix[14] = std::pow(0.01,2);
-        } else if(nmealine.getFix() == 5) { // RTK FLOAT
-            cov_matrix[0] = std::pow(1,2);
-            cov_matrix[7] = std::pow(1,2);
-            cov_matrix[14] = std::pow(1,2);
+        double delta;
+        if (nmealine.getFix() == 4) { // RTK FIX: accuracy < 1cm (1 SIGMA)
+            delta = 0.01;
+        } else if(nmealine.getFix() == 5) { // RTK FLOAT: accuracy < 10cm (1 SIGMA)
+            delta = 0.1;
         } 
+        msg.pose.pose.orientation.w = nmealine.getFix();
+
+        // Calc euler angles and their covariances
+        // msg.pose.pose.orientation.z = atan2((Y2-Y1),(X2-X1));
+        // double b = pow((X2-X1), 2) + pow((Y2-Y1), 2);
+        // msg.pose.pose.orientation.x = atan2((Z2-Z1), sqrt(b));
+
+        // Fill in covariance matrix
+        boost::array<double,36UL> cov_matrix = {0};
+        cov_matrix[0] = pow(delta,2);
+        cov_matrix[7] = pow(delta,2);
+        cov_matrix[14] = pow(delta,2);
+        // cov_matrix[21] = pow( 1/(1 + pow((Z2-Z1)/sqrt(b), 2)) , 2) * ( pow(b,-1) * (2*pow(delta, 2)) + pow(b,-3) * (pow((2*(X2-X1)), 2) * (2*pow(delta, 2)) + pow((2*(Y2-Y1)), 2) * (2*pow(delta, 2)) ) );
+        // cov_matrix[35] = pow( 1/(1 + pow((Y2-Y1)/(X2-X1), 2)) , 2) * (2* pow( (Y2-Y1)*delta/pow(X2-X1, 2) , 2) + 2 * pow( delta/(X2-X1) , 2) );
+
         msg.pose.covariance = cov_matrix;
         
         // Publish data
@@ -137,8 +143,8 @@ void publishRMCline(RMCnmealine nmealine, std::string frame_id, u_int32_t& seque
     msg.header.stamp = ros::Time::now();
 
     // Body
-    msg.vector.x = nmealine.getSpeed() * cos(nmealine.getAngle_deg() * M_PI/180);
-    msg.vector.y = nmealine.getSpeed() * sin(nmealine.getAngle_deg() * M_PI/180);
+    msg.vector.x = 0.514444444 * nmealine.getSpeed() * cos(DegToRad(nmealine.getAngle_deg()));
+    msg.vector.y = 0.514444444 * nmealine.getSpeed() * sin(DegToRad(nmealine.getAngle_deg()));
     msg.vector.z = 0;   
 
     // Publish data

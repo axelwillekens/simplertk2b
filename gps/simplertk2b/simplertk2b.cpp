@@ -72,9 +72,15 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
         RMCnmealine rmcline = RMCnmealine();
         rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         rmcline.setStatus((*(words.begin()+2)).c_str()[0]);
-        rmcline.setLat(std::atof((*(words.begin()+3)).c_str()));
+        std::string lat = (*(words.begin()+3)).c_str();
+        std::string lat_deg = lat.substr(0,2);
+        std::string lat_sec = lat.substr(2);
+        rmcline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
         rmcline.setLatorientation((*(words.begin()+4)).c_str()[0]);
-        rmcline.setLon(std::atof((*(words.begin()+5)).c_str()));
+        std::string lon = (*(words.begin()+5)).c_str();
+        std::string lon_deg = lon.substr(0,3);
+        std::string lon_sec = lon.substr(3);
+        rmcline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
         rmcline.setLonorientation((*(words.begin()+6)).c_str()[0]);
         rmcline.setSpeed(std::atof((*(words.begin()+7)).c_str()));
         rmcline.setAngle_deg(std::atof((*(words.begin()+8)).c_str()));
