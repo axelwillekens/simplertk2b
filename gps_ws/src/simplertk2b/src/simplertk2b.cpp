@@ -7,8 +7,8 @@
 
 #define MAX_SEQ 2^32
 
-void ggaNMEAcallback(GGAnmealine&);
-void rmcNMEAcallback(RMCnmealine&);
+void ggaNMEAcallback(GGAnmealine&,int);
+void rmcNMEAcallback(RMCnmealine&,int);
 
 void publishGGAline(GGAnmealine, std::string, u_int32_t&);
 void publishRMCline(RMCnmealine, std::string, u_int32_t&);
@@ -16,7 +16,7 @@ void publishRMCline(RMCnmealine, std::string, u_int32_t&);
 ros::Publisher gga_pub;
 ros::Publisher rmc_pub;
 
-std::string frame_gps;
+std::string frame_gps[2];
 int zone;
 
 u_int32_t gga_seq;
@@ -27,25 +27,27 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "gps_system");
     ros::NodeHandle n("~");
 
-    std::string port_gps;
+    std::string port_gps_left;
+    std::string port_gps_right;
     std::string server;
     std::string mountpoint;
     std::string username;
     std::string pwd;
 
-    n.param<std::string>("port_gps", port_gps, "/dev/ttyACM0");
+    n.param<std::string>("port_gps_left", port_gps_left, "/dev/ttyACM0");
+    n.param<std::string>("port_gps_right", port_gps_right, "/dev/ttyACM1");
     n.param<std::string>("server", server, "flepos.vlaanderen.be");
     n.param<std::string>("mountpoint", mountpoint, "FLEPOSVRS32GREC");
     n.param<std::string>("username", username, "852a009");
     n.param<std::string>("pwd", pwd, "97115");
-    n.param<std::string>("frame_gps", frame_gps, "gps_frame");
+    n.param<std::string>("frame_gps_left", frame_gps[0], "frame_gps_left");
+    n.param<std::string>("frame_gps_right", frame_gps[1], "frame_gps_right");
     n.param<int>("zone", zone, 31);
 
     gga_pub = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("gga_pub", 1000);
     rmc_pub = n.advertise<geometry_msgs::Vector3Stamped>("rmc_pub", 1000);
 
-    std::cout << "Portname is: " << port_gps << std::endl;
-    Simplertk2b simplertk2b(port_gps, server, mountpoint, username, pwd);
+    Simplertk2b simplertk2b(port_gps_left, port_gps_right, server, mountpoint, username, pwd);
     simplertk2b.setGGAcallback(ggaNMEAcallback);
     simplertk2b.setRMCcallback(rmcNMEAcallback);
 
@@ -53,12 +55,12 @@ int main(int argc, char **argv) {
     rmc_seq = 0;
 }
 
-void ggaNMEAcallback(GGAnmealine& nmealine) {
-    publishGGAline(nmealine, frame_gps, gga_seq);
+void ggaNMEAcallback(GGAnmealine& nmealine, int index) {
+    publishGGAline(nmealine, frame_gps[index], gga_seq);
 }
 
-void rmcNMEAcallback(RMCnmealine& nmealine) {
-    publishRMCline(nmealine, frame_gps, rmc_seq);
+void rmcNMEAcallback(RMCnmealine& nmealine, int index) {
+    publishRMCline(nmealine, frame_gps[index], rmc_seq);
 }
 
 void publishGGAline(GGAnmealine nmealine, std::string frame_id, u_int32_t& sequencer) {
