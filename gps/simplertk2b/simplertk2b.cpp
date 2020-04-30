@@ -50,14 +50,22 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
         GGAnmealine ggaline = GGAnmealine();
         ggaline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         std::string lat = (*(words.begin()+2)).c_str();
-        std::string lat_deg = lat.substr(0,2);
-        std::string lat_sec = lat.substr(2);
-        ggaline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
+        try {
+            std::string lat_deg = lat.substr(0,2);
+            std::string lat_sec = lat.substr(2);
+            ggaline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
+        } catch(const std::out_of_range& e) {
+            std::cerr << "cannot index GGA string correctly" << std::endl;
+        } 
         ggaline.setLatorientation((*(words.begin()+3)).c_str()[0]);
         std::string lon = (*(words.begin()+4)).c_str();
-        std::string lon_deg = lon.substr(0,3);
-        std::string lon_sec = lon.substr(3);
-        ggaline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
+        try {
+            std::string lon_deg = lon.substr(0,3);
+            std::string lon_sec = lon.substr(3);
+            ggaline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "cannot index GGA string correctly" << std::endl;
+        }
         ggaline.setLonorientation((*(words.begin()+5)).c_str()[0]);
         ggaline.setFix(std::stoi(*(words.begin()+6)));
         ggaline.setNumSats(std::stoi(*(words.begin()+7)));
@@ -76,14 +84,22 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
         rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         rmcline.setStatus((*(words.begin()+2)).c_str()[0]);
         std::string lat = (*(words.begin()+3)).c_str();
-        std::string lat_deg = lat.substr(0,2);
-        std::string lat_sec = lat.substr(2);
-        rmcline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
+        try {
+            std::string lat_deg = lat.substr(0,2);
+            std::string lat_sec = lat.substr(2);
+            rmcline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "cannot index RMC string correctly" << std::endl;
+        }
         rmcline.setLatorientation((*(words.begin()+4)).c_str()[0]);
         std::string lon = (*(words.begin()+5)).c_str();
-        std::string lon_deg = lon.substr(0,3);
-        std::string lon_sec = lon.substr(3);
-        rmcline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
+        try {
+            std::string lon_deg = lon.substr(0,3);
+            std::string lon_sec = lon.substr(3);
+            rmcline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "cannot index RMC string correctly" << std::endl;
+        }
         rmcline.setLonorientation((*(words.begin()+6)).c_str()[0]);
         rmcline.setSpeed(std::atof((*(words.begin()+7)).c_str()));
         rmcline.setAngle_deg(std::atof((*(words.begin()+8)).c_str()));
