@@ -1,20 +1,25 @@
 #include "simplertk2b.h"
 
-Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
-    , ntripActive(false), mountpoint(mountpoint), username(username), passwd(passwd), portname(serialportname), ntripdelay(4), firstntripsent(false)
-    , ggacallback(nullptr), rmccallback(nullptr)
+Simplertk2b::Simplertk2b(std::string serialportnameMaster, std::string serialportnameSlave, std::string server, std::string mountpoint, std::string username, std::string passwd) : starttime(std::chrono::system_clock::now())
+    , ntripActive(false), ntripdelay(4), firstntripsent(false), ggacallback(nullptr), rmccallback(nullptr) 
 {
-    // Init of NTRIP server
-    struct Args args = {0};
+    // initializement
+    serialportname[0] = serialportnameMaster;
+    serialportname[1] = serialportnameSlave;
+
+    // Init of NTRIP args
     args.server = server.c_str();
     args.mount = mountpoint.c_str();
     args.port = 2101;
     args.user = username.c_str();
     args.password = passwd.c_str();
+    args.num_serial_ports = 2;
+    args.serial_ports[0] = 0;
+    args.serial_ports[1] = 0;
 
-    if ((this->sockfd = connectNtrip(&args)) != -1) { 
+    if ((this->args.sockfd = connectNtrip(&args)) != -1) { 
         this->ntripActive = true;
-        ntripThread = std::thread(socketWork,this->sockfd,&args);
+        ntripThread = std::thread(socketWork,this->args.sockfd,&args);
         std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     } else {
         std::cerr << "Connection with NTRIP server failed! See above error for more info." << std::endl;
@@ -22,23 +27,21 @@ Simplertk2b::Simplertk2b(std::string serialportname, std::string server, std::st
         std::cerr << "Check if your NTRIP account settings are correct." << std::endl;
     }
 
-    // Init Serial Port
-    this->setSerialPort(initSerialComm(portname.c_str()));
-    if (this->serial_port == -1) {
-        std::cerr << "Cannot make a connection on this port" << std::endl;
-        std::cerr << "Check if your serial port is correct" << std::endl;
-    } else {
-        serialThread = std::thread(serialWork, this);
+    // Init Serial Port master
+    for (int i=0; i < args.num_serial_ports; i++) {
+        serialThread[i] = std::thread(serialWork, this, i);
     }
 }
 
 Simplertk2b::~Simplertk2b() {
-    CloseSerialPort(this->serial_port);  
-    if (serialThread.joinable()) serialThread.join();
+    CloseSerialPort(this->args.serial_ports[0]);  
+    CloseSerialPort(this->args.serial_ports[1]);  
+    if (serialThread[0].joinable()) serialThread[0].join();
+    if (serialThread[1].joinable()) serialThread[1].join();
     if (ntripThread.joinable()) ntripThread.join();  
 }
 
-void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine) {
+void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string fullnmealine) {
     std::vector<std::string> words;
     boost::split(words, nmealine, boost::is_any_of(","));
 
@@ -66,7 +69,7 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
 
         // initiate callback
         if (ggacallback != nullptr) {
-            ggacallback(ggaline);
+            ggacallback(ggaline, index);
         }
     } else if (*words.begin() == "$GNRMC") {
         RMCnmealine rmcline = RMCnmealine();
@@ -90,7 +93,7 @@ void Simplertk2b::processNMEAline(std::string nmealine, std::string fullnmealine
 
         // initiate callback
         if (rmccallback != nullptr) {
-            rmccallback(rmcline);
+            rmccallback(rmcline, index);
         }
     }
 }
@@ -100,14 +103,11 @@ bool Simplertk2b::isNtripActive() { return this->ntripActive; }
 std::chrono::system_clock::time_point Simplertk2b::getStartTime() { return starttime; }
 void Simplertk2b::setStartTime(std::chrono::system_clock::time_point starttime) { this->starttime = starttime; }
 
-int Simplertk2b::getSerialPort() { return this->serial_port; }
-void Simplertk2b::setSerialPort(int serial_port) {
-     this->serial_port = serial_port;
-     updateSerial_port(serial_port);
-}
+int Simplertk2b::getSerialPort(int index) { return this->args.serial_ports[index]; }
+void Simplertk2b::setSerialPort(int index, int serial_port) { this->args.serial_ports[index] = serial_port; }
 
-int Simplertk2b::getSockfd() { return this->sockfd; }
-std::string Simplertk2b::getPortName() { return this->portname; }
+int Simplertk2b::getSockfd() { return this->args.sockfd; }
+std::string Simplertk2b::getPortName(int index) { return this->serialportname[index]; }
 
 int Simplertk2b::getNTRIPdelay() { return this->ntripdelay; }
 void Simplertk2b::setNTRIPdelay(int ntripdelay) { this->ntripdelay = ntripdelay; }
@@ -118,18 +118,28 @@ void Simplertk2b::setFirstNTRIPsent(bool firstntripsent) { this->firstntripsent 
 
 std::string Simplertk2b::getNtripnmealine() { return this->ntripnmealine; }
 
-void Simplertk2b::setGGAcallback(void (*ggacallback)(GGAnmealine&)) { this->ggacallback = ggacallback; }
-void Simplertk2b::setRMCcallback(void (*rmccallback)(RMCnmealine&)) { this->rmccallback = rmccallback; }
+void Simplertk2b::setGGAcallback(void (*ggacallback)(GGAnmealine&, int)) { this->ggacallback = ggacallback; }
+void Simplertk2b::setRMCcallback(void (*rmccallback)(RMCnmealine&, int)) { this->rmccallback = rmccallback; }
 
-void serialWork(Simplertk2b* simplertk2b) {
+void serialWork(Simplertk2b* simplertk2b, int index) {
+    // create serial port 
+    int serialport = initSerialComm(simplertk2b->getPortName(index).c_str());
+    if (serialport == -1) {
+        std::cerr << "Cannot make a connection on this port" << std::endl;
+        std::cerr << "Check if your serial port is correct" << std::endl;
+    } else {
+        simplertk2b->setSerialPort(index, serialport);
+    }
+
+    // Start the actual loop
     nmealine nmealine;
     int ret;
 
     while (1) {
-        ret = readLineSerialPort(simplertk2b->getSerialPort(), &nmealine);
+        ret = readLineSerialPort(simplertk2b->getSerialPort(index), &nmealine);
         if (ret == 0) { // SUCCESS
             // Process incoming line
-            simplertk2b->processNMEAline(nmealine.line, nmealine.fullline);
+            simplertk2b->processNMEAline(index, nmealine.line, nmealine.fullline);
             
             // NTRIP 
             if (simplertk2b->isNtripActive()) {
@@ -146,13 +156,7 @@ void serialWork(Simplertk2b* simplertk2b) {
                 }
             }
         } else if (ret == -1) { // Init Serial port again!
-            std::cerr << "File descriptor failed created new one!" << std::endl;
-            int serial_port;
-            if ((serial_port = initSerialComm(simplertk2b->getPortName().c_str())) == -1) {
-                std::cerr << "Cannot make a connection on this port" << std::endl;
-            } else {
-                simplertk2b->setSerialPort(serial_port);
-            }
+            std::cerr << "File descriptor failed!" << std::endl;
         }
     }
     

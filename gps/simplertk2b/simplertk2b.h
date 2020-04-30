@@ -29,51 +29,47 @@ class Simplertk2b
 {
 private:
     std::chrono::system_clock::time_point starttime;
-
-    std::thread ntripThread;
-    std::thread serialThread;
     bool ntripActive;
-
-    std::string mountpoint;
-    std::string username;
-    std::string passwd;
-
-    std::string portname;
-    int serial_port;
-    int sockfd;
-
+    // std::string mountpoint;
+    // std::string username;
+    // std::string passwd;
     int ntripdelay;
     bool firstntripsent;
-
     std::string ntripnmealine;
+    struct Args args; // args for NTRIP client
 
-    void (*ggacallback)(GGAnmealine&);
-    void (*rmccallback)(RMCnmealine&);
+    std::string serialportname[2];
+
+    std::thread ntripThread;
+    std::thread serialThread[2];
+
+    void (*ggacallback)(GGAnmealine&, int);
+    void (*rmccallback)(RMCnmealine&, int);
 public:
     Simplertk2b();
-    Simplertk2b(std::string portname, std::string server, std::string mountpoint, std::string username, std::string passwd);
+    Simplertk2b(std::string serialportnameMaster, std::string serialportnameSlave, std::string server, std::string mountpoint, std::string username, std::string passwd);
     ~Simplertk2b();
 
+    int getSerialPort(int index);
+    void setSerialPort(int index, int value);
+    std::string getPortName(int index);
+
+    int getSockfd();
     bool isNtripActive();
     std::chrono::system_clock::time_point getStartTime();
     void setStartTime(std::chrono::system_clock::time_point starttime);
-
-    int getSerialPort();
-    void setSerialPort(int);
-    int getSockfd();
-    std::string getPortName();
     int getNTRIPdelay();
     void setNTRIPdelay(int);
     bool getFirstNTRIPsent();
     void setFirstNTRIPsent(bool);
     std::string getNtripnmealine();
 
-    void setGGAcallback(void (*ggacallback)(GGAnmealine&));
-    void setRMCcallback(void (*rmccallback)(RMCnmealine&));
+    void setGGAcallback(void (*ggacallback)(GGAnmealine&, int));
+    void setRMCcallback(void (*rmccallback)(RMCnmealine&, int));
 
-    void processNMEAline(std::string nmealine, std::string fullnmealine);
+    void processNMEAline(int index, std::string nmealine, std::string fullnmealine);
 };
 
-void serialWork(Simplertk2b* simplertk2b);
+void serialWork(Simplertk2b* simplertk2b, int index);
 
 #endif //SIMPLERTKB_H
