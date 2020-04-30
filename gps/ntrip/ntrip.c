@@ -94,12 +94,6 @@ int connectNtrip(struct Args* args) {
     return sockfd;
 }
 
-int serial_port[2] = {0};
-
-void updateSerial_port(int index, int port) {
-    serial_port[index] = port;
-}
-
 void socketWork(int sockfd, struct Args* args) {
     int numbytes;
     char bufrecv[MAXDATASIZERCV];
@@ -109,8 +103,8 @@ void socketWork(int sockfd, struct Args* args) {
         int k = 0;
         while((numbytes=recv(sockfd, bufrecv, MAXDATASIZERCV-1, 0)) != -1) {
             for (int i = 0; i < args->num_serial_ports; i++) {
-                if (serial_port[i] != -1) {
-                    WriteSerialPort(serial_port[i], bufrecv, numbytes);
+                if (args->serial_ports[i] != -1) {
+                    WriteSerialPort(args->serial_ports[i], bufrecv, numbytes);
                 }
             }
             emptybuf(bufrecv, MAXDATASIZERCV);

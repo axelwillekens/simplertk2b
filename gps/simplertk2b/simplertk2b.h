@@ -29,19 +29,19 @@ class Simplertk2b
 {
 private:
     std::chrono::system_clock::time_point starttime;
-    std::thread ntripThread;
     bool ntripActive;
-    std::string mountpoint;
-    std::string username;
-    std::string passwd;
+    // std::string mountpoint;
+    // std::string username;
+    // std::string passwd;
     int ntripdelay;
     bool firstntripsent;
     std::string ntripnmealine;
-    int sockfd;
+    struct Args args; // args for NTRIP client
 
-    std::thread serialThread[2];
     std::string serialportname[2];
-    int serial_port[2];
+
+    std::thread ntripThread;
+    std::thread serialThread[2];
 
     void (*ggacallback)(GGAnmealine&, int);
     void (*rmccallback)(RMCnmealine&, int);
