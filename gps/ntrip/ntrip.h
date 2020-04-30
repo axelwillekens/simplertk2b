@@ -28,6 +28,7 @@ struct Args {
     const char *user;
     const char *password;
     const char *mount;
+    int num_serial_ports;
 };
 
 static char encodingTable [64] = {
@@ -43,6 +44,6 @@ int connectNtrip(struct Args* args);
 int sendGGA(int sockfd, const char* data, int size);
 void socketWork(int sockfd, struct Args* args);
 void emptybuf(char* buf, int size);
-void updateSerial_port(int port);
+void updateSerial_port(int index, int port) ;
 
 #endif
