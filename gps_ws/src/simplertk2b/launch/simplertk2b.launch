@@ -1,11 +1,13 @@
 <launch>
 <node pkg="simplertk2b" type="simplertk2b" name="simplertk2b" output="screen">
-	<param name="port_gps" value="/dev/ttyACM1" />
+	<param name="port_gps_left" value="/dev/ttyACM0" />
+	<param name="port_gps_right" value="/dev/ttyACM1" />
 	<param name="server" value="flepos.vlaanderen.be" />
 	<param name="mountpoint" value="FLEPOSVRS32GREC" />
 	<param name="username" value="852a009" />
 	<param name="pwd" value="97115" />
-	<param name="frame_gps" value="gps_frame_right" />
+	<param name="frame_gps_left" value="frame_gps_left" />
+	<param name="frame_gps_right" value="frame_gps_right" />
 	<param name="zone" value="31" />
 </node>
 </launch>
