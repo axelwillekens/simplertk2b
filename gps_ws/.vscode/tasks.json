@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "catkin_make",
+            "type": "shell",
+            "command": "catkin_make",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-r",
+                "build",
+                "devel"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "source",
+            "type": "shell",
+            "command": "source",
+            "args": [
+                "devel/setup.bash"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "sudo",
+            "type": "shell",
+            "command": "sudo",
+            "args": [
+                "su"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "launch",
+            "type": "shell",
+            "command": "roslaunch",
+            "args": [
+                "simplertk2b",
+                "simplertk2b.launch"
+            ],
+            "dependsOn": ["source", "sudo"],
+            "problemMatcher": []
+        }
+    ]
+}

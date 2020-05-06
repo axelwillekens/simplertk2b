@@ -1,5 +1,5 @@
 #include "gps/simplertk2b/simplertk2b.h"
-#include "gps/utm/UTM.h"
+#include "utm/UTM.h"
 #include <ros/ros.h>
 #include <geometry_msgs/Vector3Stamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
