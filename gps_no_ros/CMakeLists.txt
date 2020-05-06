@@ -54,11 +54,8 @@ file(GLOB gpsfiles
 add_library(gps SHARED ${gpsfiles} )
 target_link_libraries(gps pthread)
 
-find_package(Boost 1.72 REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})  
-
-find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs geometry_msgs)
-include_directories(${catkin_INCLUDE_DIRS})
+# find_package(Boost 1.72 REQUIRED)
+# include_directories(${Boost_INCLUDE_DIRS})  
 
 add_executable(simplertk2b_noros main.cpp)
 target_link_libraries(simplertk2b_noros gps ${catkin_LIBRARIES})

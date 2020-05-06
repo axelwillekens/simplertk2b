@@ -63,9 +63,9 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
 )
-link_directories(include/simplertk2b)
+link_directories(lib)
 
-add_library(utm src/gps/utm/UTM.cpp)
+add_library(utm src/UTM.cpp)
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context

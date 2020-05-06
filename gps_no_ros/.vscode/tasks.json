@@ -1,0 +1,84 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".",
+                "-DCMAKE_BUILD_TYPE=Debug",
+            ],
+            // If your system needs to use a specific gcc compiler, you can uncomment and edit the lines below
+            "options": {
+                "env": {
+                    "CC": "gcc-8",
+                    "CXX": "g++-8",
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake rm cache",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-r",
+                "CMakeCache.txt",
+                "CMakeFiles/",
+                "cmake_install.cmake",
+                "Makefile"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "clean all",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build simplertk2b_noros",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j",
+                "simplertk2b_noros"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                // On MSYS2 on Windows, vscode doesn't realise that the paths in compiler errors and warnings
+                // are absolute. The following forces vscode to interpret the paths as absolute.
+                "fileLocation": [
+                    "absolute"
+                ]
+            }
+        },
+        {
+            "label": "run simplertk2b_noros (+ build)",
+            "type": "shell",
+            "command": "./simplertk2b_noros",
+            "dependsOn": [ "build simplertk2b_noros" ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                // On MSYS2 on Windows, vscode doesn't realise that the paths in compiler errors and warnings
+                // are absolute. The following forces vscode to interpret the paths as absolute.
+                "fileLocation": [
+                    "absolute"
+                ]
+            }
+
+        }
+    ]
+}

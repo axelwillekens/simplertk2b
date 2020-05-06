@@ -1,0 +1,10 @@
+# executables
+libgps.*
+simplertk2b_noros
+
+test_results
+cmake-build-debug
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
