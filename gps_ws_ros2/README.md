@@ -7,5 +7,7 @@ It is important that the shared object library is in one of the folders that is 
 :~simplertk2b/gps\_ws\_ros2$ cp src/simplertk2b/lib/libgps.so /opt/ros/dashing/lib
 
 # Run
+sudo su
+:~simplertk2b/gps\_ws\_ros2$ source /opt/ros/dashing/setup.bash
 :~simplertk2b/gps\_ws\_ros2$ . install/local\_setup.bash
 :~simplertk2b/gps\_ws\_ros2$ ros2 run simplertk2b\_node simplertk2b\_node
