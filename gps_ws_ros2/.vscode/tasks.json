@@ -1,0 +1,52 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "colcon build",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-r",
+                "build",
+                "install",
+                "log"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "source",
+            "type": "shell",
+            "command": ".",
+            "args": [
+                "install/local_setup.bash"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "sudo",
+            "type": "shell",
+            "command": "sudo",
+            "args": [
+                "su"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "launch",
+            "type": "shell",
+            "command": "roslaunch",
+            "args": [
+                "simplertk2b",
+                "simplertk2b.launch"
+            ],
+            "dependsOn": ["source", "sudo"],
+            "problemMatcher": []
+        }
+    ]
+}
