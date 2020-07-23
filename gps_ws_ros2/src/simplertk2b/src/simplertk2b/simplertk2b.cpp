@@ -42,6 +42,8 @@ Simplertk2b::~Simplertk2b() {
 }
 
 void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string fullnmealine) {
+    if (nmealine.empty()) return;
+
     std::vector<std::string> words;
     boost::split(words, nmealine, boost::is_any_of(","));
 
@@ -52,6 +54,10 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
             printf("GGA string is : %d long, this is not the right size, which is 15.\n", (int) words.size());
             return;
         }
+        for (int i = 0; i < 9; i++) {
+            if (*(words.begin()+i) == "") return;
+        }
+	printf("GGAline %s\n", nmealine.c_str());
 
         ggaline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         std::string lat = (*(words.begin()+2)).c_str();
@@ -84,44 +90,7 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
         if (ggacallback != nullptr) {
             ggacallback(ggaline, index);
         }
-    } else if (*words.begin() == "$GNRMC") {
-        // avoid segmentation fault (memory access out of array bounds)
-        if (words.size() != 14) {
-            printf("RMC string is : %d long, this is not the right size, which is 13.\n", (int) words.size());
-            return;
-        }
-
-        rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
-        rmcline.setStatus((*(words.begin()+2)).c_str()[0]);
-        std::string lat = (*(words.begin()+3)).c_str();
-        try {
-            std::string lat_deg = lat.substr(0,2);
-            std::string lat_sec = lat.substr(2);
-            rmcline.setLat(std::atof(lat_deg.c_str())+std::atof(lat_sec.c_str())/60);
-        } catch (const std::out_of_range& e) {
-            std::cerr << "cannot index RMC string correctly" << std::endl;
-        }
-        rmcline.setLatorientation((*(words.begin()+4)).c_str()[0]);
-        std::string lon = (*(words.begin()+5)).c_str();
-        try {
-            std::string lon_deg = lon.substr(0,3);
-            std::string lon_sec = lon.substr(3);
-            rmcline.setLon(std::atof(lon_deg.c_str())+std::atof(lon_sec.c_str())/60);
-        } catch (const std::out_of_range& e) {
-            std::cerr << "cannot index RMC string correctly" << std::endl;
-        }
-        rmcline.setLonorientation((*(words.begin()+6)).c_str()[0]);
-        rmcline.setSpeed(std::atof((*(words.begin()+7)).c_str()));
-        rmcline.setAngle_deg(std::atof((*(words.begin()+8)).c_str()));
-        rmcline.setDate(std::stoi(*(words.begin()+9)));
-        rmcline.setMagneticvar((*(words.begin()+10)).c_str()[0]);
-        rmcline.setDirmagneticvar((*(words.begin()+11)).c_str()[0]);
-
-        // initiate callback
-        if (rmccallback != nullptr) {
-            rmccallback(rmcline, index);
-        }
-    }
+    } 
 }
 
 bool Simplertk2b::isNtripActive() { return this->ntripActive; }
@@ -164,6 +133,7 @@ void serialWork(Simplertk2b* simplertk2b, int index) {
     while (1) {
         ret = readLineSerialPort(simplertk2b->getSerialPort(index), &nmealine);
         if (ret == 0) { // SUCCESS
+	    simplertk2b->mtx.lock(); // BEGIN CRITICAL SECTION 
             // Process incoming line
             simplertk2b->processNMEAline(index, nmealine.line, nmealine.fullline);
             
@@ -181,6 +151,7 @@ void serialWork(Simplertk2b* simplertk2b, int index) {
                     }
                 }
             }
+	    simplertk2b->mtx.unlock(); // END CRITICAL SECTION 
         } else if (ret == -1) { // Init Serial port again!
             std::cerr << "File descriptor failed!" << std::endl;
         }

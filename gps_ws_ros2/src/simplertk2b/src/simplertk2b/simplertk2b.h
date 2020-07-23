@@ -20,6 +20,7 @@ extern "C"{
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <mutex>
 
 #include <boost/algorithm/string.hpp>
 #include "../nmealine/gganmealine.h"
@@ -48,6 +49,7 @@ private:
 
     void (*ggacallback)(GGAnmealine&, int);
     void (*rmccallback)(RMCnmealine&, int);
+
 public:
     Simplertk2b();
     Simplertk2b(std::string serialportnameMaster, std::string serialportnameSlave, std::string server, std::string mountpoint, std::string username, std::string passwd);
@@ -71,6 +73,7 @@ public:
     void setRMCcallback(void (*rmccallback)(RMCnmealine&, int));
 
     void processNMEAline(int index, std::string nmealine, std::string fullnmealine);
+    std::mutex mtx;
 };
 
 void serialWork(Simplertk2b* simplertk2b, int index);

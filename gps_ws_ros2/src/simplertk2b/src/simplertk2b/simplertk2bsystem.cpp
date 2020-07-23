@@ -21,11 +21,15 @@ void Simplertk2bPublisher::timer_callback() {
     msg.pose.pose.position.z = (Z1+Z2)/2;
 
     // Calc euler angles and their covariances
-    double tmp_theta = atan2((Y2-Y1),(X2-X1));
-    if (tmp_theta < 0) {
-        msg.pose.pose.orientation.z = tmp_theta + (2*M_PI);
-    } else {
+    double num = (X2-X1);
+    double denum = (Y2-Y1);
+    double tmp_theta = atan(denum/num);
+    if (num > 0 && denum > 0) { // 1e kwadrant 
         msg.pose.pose.orientation.z = tmp_theta;
+    } else if ((num < 0 && denum > 0) || (num < 0 && denum < 0)) { // 2e kwadrant & 3e kwadrant
+        msg.pose.pose.orientation.z = tmp_theta + M_PI;
+    } else if (num > 0 && denum < 0) { // 4e kwadrant
+        msg.pose.pose.orientation.z = (2*M_PI) + tmp_theta;
     }
     double b = pow((X2-X1), 2) + pow((Y2-Y1), 2);
     msg.pose.pose.orientation.x = atan2((Z2-Z1), sqrt(b));
