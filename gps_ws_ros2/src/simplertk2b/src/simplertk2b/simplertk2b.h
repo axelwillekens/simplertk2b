@@ -43,6 +43,9 @@ private:
     std::thread ntripThread;
     std::thread serialThread[2];
 
+    GGAnmealine ggaline;
+    RMCnmealine rmcline;
+
     void (*ggacallback)(GGAnmealine&, int);
     void (*rmccallback)(RMCnmealine&, int);
 public:

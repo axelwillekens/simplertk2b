@@ -47,7 +47,12 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
 
     std::vector<std::string>::iterator i;
     if (*words.begin() == "$GNGGA") {
-        GGAnmealine ggaline = GGAnmealine();
+        // avoid segmentation fault (memory access out of array bounds)
+        if (words.size() != 15) {
+            printf("GGA string is : %d long, this is not the right size, which is 15.\n", (int) words.size());
+            return;
+        }
+
         ggaline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         std::string lat = (*(words.begin()+2)).c_str();
         try {
@@ -80,7 +85,12 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
             ggacallback(ggaline, index);
         }
     } else if (*words.begin() == "$GNRMC") {
-        RMCnmealine rmcline = RMCnmealine();
+        // avoid segmentation fault (memory access out of array bounds)
+        if (words.size() != 14) {
+            printf("RMC string is : %d long, this is not the right size, which is 13.\n", (int) words.size());
+            return;
+        }
+
         rmcline.setFix_taken_time(std::stoi(*(words.begin()+1)));
         rmcline.setStatus((*(words.begin()+2)).c_str()[0]);
         std::string lat = (*(words.begin()+3)).c_str();

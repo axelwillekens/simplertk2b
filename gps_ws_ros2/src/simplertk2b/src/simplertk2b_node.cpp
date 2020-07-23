@@ -21,9 +21,9 @@ int main(int argc, char **argv) {
 
 
 void ggaNMEAcallback(GGAnmealine& nmealine, int index) {
-    simplertk2bpub->publishGGAline(nmealine, simplertk2bpub->getFrame_gps(index));
+    simplertk2bpub->processGGAline(nmealine, simplertk2bpub->getFrame_gps(index));
 }
 
 void rmcNMEAcallback(RMCnmealine& nmealine, int index) {
-    simplertk2bpub->publishRMCline(nmealine, simplertk2bpub->getFrame_gps(index));
+    simplertk2bpub->processRMCline(nmealine, simplertk2bpub->getFrame_gps(index));
 }
