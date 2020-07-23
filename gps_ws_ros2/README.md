@@ -16,3 +16,7 @@ sudo su
 add yourself to the group dialout
 sudo usermod -a -G dialout MY_USER_NAME
 cfr. https://unix.stackexchange.com/questions/14354/read-write-to-a-serial-port-without-root
+--> did not work: solution
+ls /dev/ | grep "ACM"
+sudo chmod 666 /dev/ttyACM0 /dev/ttyACM1
+
