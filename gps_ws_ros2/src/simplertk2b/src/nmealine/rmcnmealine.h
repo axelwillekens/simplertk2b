@@ -12,7 +12,7 @@ private:
     char status;                                //  A            Status A=active or V=Void.
                                                 //  4807.038,N   Latitude 48 deg 07.038' N
                                                 //  01131.000,E  Longitude 11 deg 31.000' E
-    double speed;                               //  022.4        Speed over the ground in knots (1 knot = 0.514444444 m/s)
+    double speed;                               //  022.4        Speed over the ground in knots
     double angle_deg;                           //  084.4        Track angle in degrees True
     int date;                                   //  230394       Date - 23rd of March 1994
     double magneticvar; char dirmagneticvar;    //  003.1,W      Magnetic Variation

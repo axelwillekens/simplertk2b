@@ -1,10 +1,10 @@
-#include "simplertk2bsystem/simplertk2bsystem.h"
+#include "simplertk2bsystem.h"
 
 Simplertk2bPublisher::Simplertk2bPublisher(std::string framegps_left, std::string framegps_right)
 : Node("Simplertk2b"), zone(31), frame_gps({framegps_left, framegps_right}), X1(0), Y1(0), Z1(0), X2(0), Y2(0), Z2(0)
 {
-    gga_pub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("gga_pub", 1000);
-    rmc_pub = this-> create_publisher<geometry_msgs::msg::Vector3Stamped>("rmc_pub", 1000);
+    gga_pub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("pos_topic", 1000);
+    rmc_pub = this-> create_publisher<geometry_msgs::msg::Vector3Stamped>("vel_topic", 1000);
 }
 
 void Simplertk2bPublisher::publishGGAline(GGAnmealine nmealine, std::string frame_id) {

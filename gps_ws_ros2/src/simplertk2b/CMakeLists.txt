@@ -19,6 +19,37 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(Boost REQUIRED system)
+
+#######################
+## Compile with ASAN ##
+#######################
+
+# Enable the address sanitizer on Mac and Linux.
+# Turn this off by setting the `NO_ASAN` environment variable to `1`
+# Cache the environment variable
+if (NOT "$ENV{NO_ASAN}" STREQUAL "")
+    if ("$ENV{NO_ASAN}" STREQUAL "1")
+        set(NO_ASAN "$ENV{NO_ASAN}" CACHE INTERNAL "Copied from environment variable")
+    elseif ("$ENV{NO_ASAN}" STREQUAL "0")
+        unset (NO_ASAN CACHE)
+    endif()
+endif()
+if(NOT WIN32 AND NOT NO_ASAN)
+    if(EXISTS "/etc/arch-release")
+        message(STATUS "Note: Compiling with dynamic asan address sanitization and leak checking (\"Arch, as a rule, doesn't include static libs\")")
+        set(CMAKE_C_FLAGS      "${CMAKE_C_FLAGS}      -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS}    -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
+    else()
+        message(STATUS "Note: Compiling with asan address sanitization and leak checking")
+        set(CMAKE_C_FLAGS      "${CMAKE_C_FLAGS}      -fsanitize=address -static-libasan -fno-omit-frame-pointer")
+        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS}    -fsanitize=address -static-libasan -fno-omit-frame-pointer")
+        set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address -static-libasan -fno-omit-frame-pointer")
+    endif()
+else()
+    message("ASAN disabled: To enable, run: NO_ASAN=0 cmake .")
+endif()
 
 #######################
 ## Build simplertk2b ##
@@ -28,16 +59,44 @@ find_package(geometry_msgs REQUIRED)
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
-add_library(utm src/UTM.cpp)
-add_executable(simplertk2b_node src/simplertk2b_node.cpp src/simplertk2bsystem.cpp)
-target_link_libraries(simplertk2b_node
-  ${catkin_LIBRARIES}
-  ${PROJECT_SOURCE_DIR}/lib/libgps.so
-  utm
+file(GLOB serialcommfiles
+    "src/serialcomm/*.h"
+    "src/serialcomm/*.c"
 )
-message("PATH TO LIBGPS: ${PROJECT_SOURCE_DIR}/lib/libgps.so")
+
+file(GLOB ntripfiles
+    "src/ntrip/*.h"
+    "src/ntrip/*.c"
+)
+
+file(GLOB nmeafiles
+    "src/nmealine/*.h"
+    "src/nmealine/*.cpp"
+)
+
+file(GLOB utmfiles
+    "src/utm/*.h"
+    "src/utm/*.cpp"
+)
+
+file(GLOB simplertk2bfiles
+    "src/simplertk2b/*.h"
+    "src/simplertk2b/*.cpp"
+    "src/simplertk2b_node.cpp"
+)
+
+add_executable(simplertk2b_node 
+    ${serialcommfiles}
+    ${ntripfiles}
+    ${nmeafiles}
+    ${utmfiles}
+    ${simplertk2bfiles}
+)
+target_link_libraries(simplertk2b_node -lboost_system -pthread)
+# message("PATH TO LIBGPS: ${PROJECT_SOURCE_DIR}/lib/libgps.so")
 ament_target_dependencies(simplertk2b_node rclcpp geometry_msgs)
 
 install(TARGETS

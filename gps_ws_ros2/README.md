@@ -11,3 +11,8 @@ sudo su
 :~simplertk2b/gps\_ws\_ros2$ source /opt/ros/dashing/setup.bash
 :~simplertk2b/gps\_ws\_ros2$ . install/local\_setup.bash
 :~simplertk2b/gps\_ws\_ros2$ ros2 run simplertk2b\_node simplertk2b\_node
+
+# run without the need of using sudo
+add yourself to the group dialout
+sudo usermod -a -G dialout MY_USER_NAME
+cfr. https://unix.stackexchange.com/questions/14354/read-write-to-a-serial-port-without-root

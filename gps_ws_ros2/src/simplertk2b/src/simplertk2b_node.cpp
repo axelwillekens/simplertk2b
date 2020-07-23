@@ -1,5 +1,5 @@
 #include <rclcpp/rclcpp.hpp>
-#include "simplertk2bsystem/simplertk2bsystem.h"
+#include "simplertk2b/simplertk2bsystem.h"
 
 std::shared_ptr<Simplertk2bPublisher> simplertk2bpub;
 

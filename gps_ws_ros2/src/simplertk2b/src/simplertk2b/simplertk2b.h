@@ -22,8 +22,8 @@ extern "C"{
 #include <chrono>
 
 #include <boost/algorithm/string.hpp>
-#include "gganmealine.h"
-#include "rmcnmealine.h"
+#include "../nmealine/gganmealine.h"
+#include "../nmealine/rmcnmealine.h"
 
 class Simplertk2b
 {

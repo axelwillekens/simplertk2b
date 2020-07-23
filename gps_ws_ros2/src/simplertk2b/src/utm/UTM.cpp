@@ -15,7 +15,7 @@
 // 
 // 1) http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html
 
-#include "utm/UTM.h"
+#include "UTM.h"
 
 // DegToRad
 // Converts degrees to radians.

@@ -4,8 +4,8 @@
 #define MAX_SEQ 2^32
 
 
-#include "gps/simplertk2b/simplertk2b.h"
-#include "utm/UTM.h"
+#include "../simplertk2b/simplertk2b.h"
+#include "../utm/UTM.h"
 #include <geometry_msgs/msg/vector3_stamped.hpp>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include <math.h>
