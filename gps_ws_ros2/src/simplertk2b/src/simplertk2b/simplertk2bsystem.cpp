@@ -23,14 +23,18 @@ void Simplertk2bPublisher::timer_callback() {
     // Calc euler angles and their covariances
     double num = (X2-X1);
     double denum = (Y2-Y1);
-    double tmp_theta = atan(denum/num);
-    if (num > 0 && denum > 0) { // 1e kwadrant 
-        msg.pose.pose.orientation.z = tmp_theta;
-    } else if ((num < 0 && denum > 0) || (num < 0 && denum < 0)) { // 2e kwadrant & 3e kwadrant
-        msg.pose.pose.orientation.z = tmp_theta + M_PI;
-    } else if (num > 0 && denum < 0) { // 4e kwadrant
-        msg.pose.pose.orientation.z = (2*M_PI) + tmp_theta;
+    if (num != 0) {
+        if (num > 0) { 
+            if (denum >= 0) msg.pose.pose.orientation.z = atan(denum/num); // 1e kwadrant 
+            else msg.pose.pose.orientation.z = atan(denum/num) + (2*M_PI); // 4e kwadrant
+        } else { // num < 0: 2e kwadrant & 3e kwadrant
+            msg.pose.pose.orientation.z = atan(denum/num) + M_PI;
+        } 
+    } else { // num == 0
+        if (denum >= 0) msg.pose.pose.orientation.z = M_PI; // 1e kwadrant 
+        else msg.pose.pose.orientation.z = (3/2)*M_PI; // 4e kwadrant 
     }
+
     double b = pow((X2-X1), 2) + pow((Y2-Y1), 2);
     msg.pose.pose.orientation.x = atan2((Z2-Z1), sqrt(b));
     
@@ -38,6 +42,7 @@ void Simplertk2bPublisher::timer_callback() {
     pos_pub->publish(msg);
 
     // ** vel_topic **
+    // vel_topic is published when ready.
 }
 
 void Simplertk2bPublisher::processGGAline(GGAnmealine nmealine, std::string frame_id) {
