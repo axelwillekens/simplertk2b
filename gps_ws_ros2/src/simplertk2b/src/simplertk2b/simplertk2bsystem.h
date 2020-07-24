@@ -26,6 +26,7 @@ class Simplertk2bPublisher: public rclcpp::Node
 
         double X1,Y1,Z1;
         double X2,Y2,Z2;
+	double yaw,roll;
 
     public:
         Simplertk2bPublisher(std::string framegps_left, std::string framegps_right);

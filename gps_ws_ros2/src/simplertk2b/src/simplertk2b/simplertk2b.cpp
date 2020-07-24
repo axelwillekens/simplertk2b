@@ -96,7 +96,7 @@ void Simplertk2b::processNMEAline(int index, std::string nmealine, std::string f
             printf("RMC string is : %d long, this is not the right size, which is 13.\n", (int) words.size());
             return;
         }
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 8; i++) {
             if (*(words.begin()+i) == "") return;
         }
         printf("RMCline %s\n", nmealine.c_str());

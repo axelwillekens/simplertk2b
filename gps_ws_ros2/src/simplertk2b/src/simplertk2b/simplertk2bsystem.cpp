@@ -1,7 +1,7 @@
 #include "simplertk2bsystem.h"
 
 Simplertk2bPublisher::Simplertk2bPublisher(std::string framegps_left, std::string framegps_right)
-: Node("Simplertk2b"), zone(31), frame_gps({framegps_left, framegps_right}), X1(0), Y1(0), Z1(0), X2(0), Y2(0), Z2(0)
+: Node("Simplertk2b"), zone(31), frame_gps({framegps_left, framegps_right}), X1(0), Y1(0), Z1(0), X2(0), Y2(0), Z2(0), yaw(0), roll(0)
 {
     pos_pub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("pos_topic", 1000);
     vel_pub = this-> create_publisher<geometry_msgs::msg::Vector3Stamped>("vel_topic", 1000);
@@ -25,18 +25,20 @@ void Simplertk2bPublisher::timer_callback() {
     double denum = (Y2-Y1);
     if (num != 0) {
         if (num > 0) { 
-            if (denum >= 0) msg.pose.pose.orientation.z = atan(denum/num); // 1e kwadrant 
-            else msg.pose.pose.orientation.z = atan(denum/num) + (2*M_PI); // 4e kwadrant
+            if (denum >= 0) yaw = atan(denum/num); // 1e kwadrant 
+            else yaw = atan(denum/num) + (2*M_PI); // 4e kwadrant
         } else { // num < 0: 2e kwadrant & 3e kwadrant
-            msg.pose.pose.orientation.z = atan(denum/num) + M_PI;
+            yaw = atan(denum/num) + M_PI;
         } 
     } else { // num == 0
-        if (denum >= 0) msg.pose.pose.orientation.z = M_PI; // 1e kwadrant 
-        else msg.pose.pose.orientation.z = (3/2)*M_PI; // 4e kwadrant 
+        if (denum >= 0) yaw = M_PI; // 1e kwadrant 
+        else yaw = (3/2)*M_PI; // 4e kwadrant 
     }
+    msg.pose.pose.orientation.z = yaw; 
 
     double b = pow((X2-X1), 2) + pow((Y2-Y1), 2);
-    msg.pose.pose.orientation.x = atan2((Z2-Z1), sqrt(b));
+    roll = atan2((Z2-Z1), sqrt(b));
+    msg.pose.pose.orientation.x = roll;
     
     // Publish data
     pos_pub->publish(msg);
@@ -73,12 +75,13 @@ void Simplertk2bPublisher::processRMCline(RMCnmealine nmealine, std::string fram
     // std::cout << nmealine << std::endl;
     geometry_msgs::msg::Vector3Stamped msg;
     // Header
-    msg.header.frame_id = frame_id.c_str();
+    std::string frame = "gps_frame";
+    msg.header.frame_id = frame.c_str();
     msg.header.stamp = rclcpp::Clock().now();
 
     // Body
-    msg.vector.x = 0.514444444 * nmealine.getSpeed() * cos(DegToRad(nmealine.getAngle_deg()));
-    msg.vector.y = 0.514444444 * nmealine.getSpeed() * sin(DegToRad(nmealine.getAngle_deg()));
+    msg.vector.x = 0.514444444 * nmealine.getSpeed() * cos(yaw);
+    msg.vector.y = 0.514444444 * nmealine.getSpeed() * sin(yaw);
     msg.vector.z = 0;   
 
     // Publish data
